@@ -9,11 +9,13 @@ import UIKit
 
 class LoginController: UIViewController {
 
-    @IBOutlet var emailtextField: UITextField!
+    @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var loginButton: UIButton!
+    @IBOutlet var singupLabel: UILabel!
     
+    let loginStyoryboard = UIStoryboard(name: "Main", bundle: nil)
     
     var errorHeight: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -23,11 +25,14 @@ class LoginController: UIViewController {
         errorHeight = errorLabel.heightAnchor.constraint(equalToConstant: 0)
         errorHeight.isActive = true
         passwordTextField.addTarget(self, action: #selector(passwordLength), for: .editingChanged)
+        let tab: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(moveToSingup))
+        singupLabel.isUserInteractionEnabled = true
+        singupLabel.addGestureRecognizer(tab)
     }
 
 
     @IBAction func loginButton(_ sender: UIButton) {
-        let emailText = emailtextField.text
+        let emailText = emailTextField.text
         let passwordText = passwordTextField.text
         
         if !isValidEmail(email: emailText) {
@@ -41,6 +46,11 @@ class LoginController: UIViewController {
             return
         }
         errorHeight.isActive = true
+    }
+    @objc func moveToSingup(){
+        print("asdfasdfasdf")
+        let singUpVC = loginStyoryboard.instantiateViewController(identifier: "SingUpVC")
+        self.show(singUpVC, sender: self)
     }
     
     @objc func passwordLength() {
