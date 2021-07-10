@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		353707FA268A0395005543E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353707F9268A0395005543E9 /* AppDelegate.swift */; };
 		353707FC268A0395005543E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353707FB268A0395005543E9 /* SceneDelegate.swift */; };
-		353707FE268A0395005543E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353707FD268A0395005543E9 /* ViewController.swift */; };
+		353707FE268A0395005543E9 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353707FD268A0395005543E9 /* LoginController.swift */; };
 		35370801268A0395005543E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353707FF268A0395005543E9 /* Main.storyboard */; };
 		35370803268A0397005543E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35370802268A0397005543E9 /* Assets.xcassets */; };
 		35370806268A0397005543E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35370804268A0397005543E9 /* LaunchScreen.storyboard */; };
@@ -19,7 +19,7 @@
 		353707F6268A0395005543E9 /* Aqua_Talk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aqua_Talk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		353707F9268A0395005543E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		353707FB268A0395005543E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		353707FD268A0395005543E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		353707FD268A0395005543E9 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		35370800268A0395005543E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		35370802268A0397005543E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35370805268A0397005543E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 			children = (
 				353707F9268A0395005543E9 /* AppDelegate.swift */,
 				353707FB268A0395005543E9 /* SceneDelegate.swift */,
-				353707FD268A0395005543E9 /* ViewController.swift */,
+				353707FD268A0395005543E9 /* LoginController.swift */,
 				353707FF268A0395005543E9 /* Main.storyboard */,
 				35370802268A0397005543E9 /* Assets.xcassets */,
 				35370804268A0397005543E9 /* LaunchScreen.storyboard */,
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				353707FE268A0395005543E9 /* ViewController.swift in Sources */,
+				353707FE268A0395005543E9 /* LoginController.swift in Sources */,
 				353707FA268A0395005543E9 /* AppDelegate.swift in Sources */,
 				353707FC268A0395005543E9 /* SceneDelegate.swift in Sources */,
 			);
@@ -216,7 +216,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -271,7 +271,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
