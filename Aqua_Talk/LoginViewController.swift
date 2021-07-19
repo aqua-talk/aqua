@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
@@ -16,7 +16,7 @@ class LoginController: UIViewController {
     @IBOutlet var singupLabel: UILabel!
     
     let loginStyoryboard = UIStoryboard(name: "Main", bundle: nil)
-    
+    let regularExpression = RegularExpression()
     var errorHeight: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,20 +32,25 @@ class LoginController: UIViewController {
 
 
     @IBAction func loginButton(_ sender: UIButton) {
-        let emailText = emailTextField.text
-        let passwordText = passwordTextField.text
-        
-        if !isValidEmail(email: emailText) {
-            errorLabel.text = "이메일 형식을 확인하세요."
-            errorHeight.isActive = false
-            return
-        }
-        if !isValidPassword(password: passwordText) {
-            errorLabel.text = "비밀번호를 확인하세요."
-            errorHeight.isActive = false
-            return
-        }
+//        let emailText = emailTextField.text
+//        let passwordText = passwordTextField.text
+//
+//        if !regularExpression.isValidEmail(email: emailText) {
+//            errorLabel.text = "이메일 형식을 확인하세요."
+//            errorHeight.isActive = false
+//            return
+//        }
+//        if !regularExpression.isValidPassword(password: passwordText) {
+//            errorLabel.text = "비밀번호를 확인하세요."
+//            errorHeight.isActive = false
+//            return
+//        }
         errorHeight.isActive = true
+        
+        guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+            return
+        }
+        self.navigationController?.pushViewController(homeVC, animated: true)
     }
     @objc func moveToSingup(){
         print("asdfasdfasdf")
@@ -62,6 +67,9 @@ class LoginController: UIViewController {
             loginButton.isEnabled = false
         }
     }
+}
+
+class RegularExpression {
     
     func isValidEmail(email: String?) -> Bool {
         let emailPattern = #"^\S+@\S+\.\S+$"#

@@ -9,23 +9,25 @@
 /* Begin PBXBuildFile section */
 		353707FA268A0395005543E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353707F9268A0395005543E9 /* AppDelegate.swift */; };
 		353707FC268A0395005543E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353707FB268A0395005543E9 /* SceneDelegate.swift */; };
-		353707FE268A0395005543E9 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353707FD268A0395005543E9 /* LoginController.swift */; };
+		353707FE268A0395005543E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353707FD268A0395005543E9 /* LoginViewController.swift */; };
 		35370801268A0395005543E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353707FF268A0395005543E9 /* Main.storyboard */; };
 		35370803268A0397005543E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35370802268A0397005543E9 /* Assets.xcassets */; };
 		35370806268A0397005543E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35370804268A0397005543E9 /* LaunchScreen.storyboard */; };
 		357D3A3A2699D9B900ED5A6D /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357D3A392699D9B900ED5A6D /* SingUpViewController.swift */; };
+		35A0187F269AAE760005B28B /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0187E269AAE760005B28B /* UserInfoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		353707F6268A0395005543E9 /* Aqua_Talk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aqua_Talk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		353707F9268A0395005543E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		353707FB268A0395005543E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		353707FD268A0395005543E9 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		353707FD268A0395005543E9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		35370800268A0395005543E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		35370802268A0397005543E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35370805268A0397005543E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35370807268A0397005543E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		357D3A392699D9B900ED5A6D /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
+		35A0187E269AAE760005B28B /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +62,13 @@
 			children = (
 				353707F9268A0395005543E9 /* AppDelegate.swift */,
 				353707FB268A0395005543E9 /* SceneDelegate.swift */,
-				353707FD268A0395005543E9 /* LoginController.swift */,
+				353707FD268A0395005543E9 /* LoginViewController.swift */,
 				353707FF268A0395005543E9 /* Main.storyboard */,
 				35370802268A0397005543E9 /* Assets.xcassets */,
 				35370804268A0397005543E9 /* LaunchScreen.storyboard */,
 				35370807268A0397005543E9 /* Info.plist */,
 				357D3A392699D9B900ED5A6D /* SingUpViewController.swift */,
+				35A0187E269AAE760005B28B /* UserInfoModel.swift */,
 			);
 			path = Aqua_Talk;
 			sourceTree = "<group>";
@@ -140,10 +143,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				353707FE268A0395005543E9 /* LoginController.swift in Sources */,
+				353707FE268A0395005543E9 /* LoginViewController.swift in Sources */,
 				353707FA268A0395005543E9 /* AppDelegate.swift in Sources */,
 				357D3A3A2699D9B900ED5A6D /* SingUpViewController.swift in Sources */,
 				353707FC268A0395005543E9 /* SceneDelegate.swift in Sources */,
+				35A0187F269AAE760005B28B /* UserInfoModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
