@@ -18,6 +18,11 @@ class LoginViewController: UIViewController {
     let loginStyoryboard = UIStoryboard(name: "Main", bundle: nil)
     let regularExpression = RegularExpression()
     var errorHeight: NSLayoutConstraint!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //서버랑연결
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +50,8 @@ class LoginViewController: UIViewController {
 //            errorHeight.isActive = false
 //            return
 //        }
+        
+        //여기부터 서버에 정보를 보내서 true false 값 받아와서 결과 리턴
         errorHeight.isActive = true
         
         guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
@@ -52,8 +59,9 @@ class LoginViewController: UIViewController {
         }
         self.navigationController?.pushViewController(homeVC, animated: true)
     }
+    
     @objc func moveToSingup(){
-        print("asdfasdfasdf")
+        
         let singUpVC = loginStyoryboard.instantiateViewController(identifier: "SingUpVC")
         self.show(singUpVC, sender: self)
     }
