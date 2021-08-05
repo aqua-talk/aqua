@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewModel {
+class UserViewModel {
     enum Section: Int, CaseIterable {
         case my
         case friendList
@@ -38,6 +38,9 @@ class MainViewModel {
     
     func updateUser(_ user: UserInfo) {
         manager.updateUser(user)//구현안해놨음
+    }
+    func loadTasks(_ user: UserInfo) {
+        manager.loadUser(user)
     }
 }
 

@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var singupLabel: UILabel!
     
+    let userViewModel = UserViewModel()
     let loginStyoryboard = UIStoryboard(name: "Main", bundle: nil)
     let regularExpression = RegularExpression()
     var errorHeight: NSLayoutConstraint!
@@ -37,9 +38,9 @@ class LoginViewController: UIViewController {
 
 
     @IBAction func loginButton(_ sender: UIButton) {
-//        let emailText = emailTextField.text
-//        let passwordText = passwordTextField.text
-//
+        let emailText = emailTextField.text
+        let passwordText = passwordTextField.text
+
 //        if !regularExpression.isValidEmail(email: emailText) {
 //            errorLabel.text = "이메일 형식을 확인하세요."
 //            errorHeight.isActive = false
@@ -51,7 +52,15 @@ class LoginViewController: UIViewController {
 //            return
 //        }
         
+
         //여기부터 서버에 정보를 보내서 true false 값 받아와서 결과 리턴
+        var user:UserInfo?
+        URLSessionAPI.loginUserInfo(emailText!, passwordText!) { userInfo in
+            user = userInfo[0]
+        }
+
+        userViewModel.loadTasks(user!)
+        //이런 느낌 정확한거아님...
         errorHeight.isActive = true
         
         guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {

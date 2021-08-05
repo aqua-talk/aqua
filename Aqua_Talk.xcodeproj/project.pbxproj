@@ -17,6 +17,7 @@
 		357D3A3A2699D9B900ED5A6D /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357D3A392699D9B900ED5A6D /* SingUpViewController.swift */; };
 		3583BB7826BABC5000E7C505 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3583BB7726BABC5000E7C505 /* FriendsViewController.swift */; };
 		35A0187F269AAE760005B28B /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0187E269AAE760005B28B /* UserInfoModel.swift */; };
+		35A5DB1A26BC115E0057AFAA /* TalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A5DB1926BC115E0057AFAA /* TalkViewController.swift */; };
 		35CAD24A26B51583001B3459 /* URLSessionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CAD24926B51583001B3459 /* URLSessionAPI.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		357D3A392699D9B900ED5A6D /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		3583BB7726BABC5000E7C505 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		35A0187E269AAE760005B28B /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
+		35A5DB1926BC115E0057AFAA /* TalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkViewController.swift; sourceTree = "<group>"; };
 		35CAD24926B51583001B3459 /* URLSessionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 				35A0187E269AAE760005B28B /* UserInfoModel.swift */,
 				3521D1FB26B2E98700DFC826 /* ViewModels.swift */,
 				35CAD24926B51583001B3459 /* URLSessionAPI.swift */,
+				35A5DB1926BC115E0057AFAA /* TalkViewController.swift */,
 			);
 			path = Aqua_Talk;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				353707FA268A0395005543E9 /* AppDelegate.swift in Sources */,
 				357D3A3A2699D9B900ED5A6D /* SingUpViewController.swift in Sources */,
 				353707FC268A0395005543E9 /* SceneDelegate.swift in Sources */,
+				35A5DB1A26BC115E0057AFAA /* TalkViewController.swift in Sources */,
 				35A0187F269AAE760005B28B /* UserInfoModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
