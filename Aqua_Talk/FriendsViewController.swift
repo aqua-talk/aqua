@@ -12,7 +12,6 @@ class FriendsViewController: UIViewController {
     @IBOutlet weak var titleButton: UIBarButtonItem!
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -23,6 +22,7 @@ class FriendsViewController: UIViewController {
     
 
 }
+
 
 extension FriendsViewController: UITableViewDelegate{
     

@@ -67,7 +67,15 @@ class AquaManager {
 //    func createFriend(email: String, name: String, statusMessage: String, profile: UIImage) -> FriendInfo{
 //        return FriendInfo(email: email, name: name, statusMessage: statusMessage, profile: profile)
 //    }
-    func loadUser(_ userInfo: UserInfo){
+    func loadUser(_ email: String, _ password: String){
+        URLSessionAPI.loginUserInfo(email, password) { userInfo in
+            print("--------->\(userInfo)")
+            guard userInfo.count != 0 else {
+                print("not value")
+                return
+            }
+            self.user = userInfo[0]
+        }
         // 서버에서 받아온 정보를 넣어주면됨 대기
     }
     func updateUser(_ userInfo: UserInfo){

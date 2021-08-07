@@ -45,12 +45,12 @@ class URLSessionAPI {
     static func loginUserInfo(_ email: String, _ password: String ,completion: @escaping ([UserInfo]) -> Void) {
         let session = URLSession(configuration: .default)
         
-        var urlComponents = URLComponents(string: "여기에 서버 url주소")!
-        let emailQuery = URLQueryItem(name: "email(미정임)", value: email)
-        let passwordQuery = URLQueryItem(name: "password(미정)", value: password)
-        
-        urlComponents.queryItems?.append(emailQuery)
-        urlComponents.queryItems?.append(passwordQuery)
+        var urlComponents = URLComponents(string: "http://18.119.30.174:3000")!
+//        let emailQuery = URLQueryItem(name: "email(미정임)", value: email)
+//        let passwordQuery = URLQueryItem(name: "password(미정)", value: password)
+//        
+//        urlComponents.queryItems?.append(emailQuery)
+//        urlComponents.queryItems?.append(passwordQuery)
         let requestURL = urlComponents.url!
         
         let dataTask = session.dataTask(with: requestURL) { data, response, error in
@@ -99,7 +99,7 @@ class URLSessionAPI {
     static func searchFriend(_ name: String, completion: @escaping ([FriendInfo]) -> Void) {
         let session = URLSession(configuration: .default)
         
-        var urlComponents = URLComponents(string: "여기에 서버 url주소")!
+        var urlComponents = URLComponents(string: "http://18.119.30.174:3000")!
         let nameQuery = URLQueryItem(name: "email(미정임)", value: name)
         
         urlComponents.queryItems?.append(nameQuery)
@@ -128,6 +128,7 @@ class URLSessionAPI {
         do {
             let response = try decoder.decode(UserInfoResponse.self, from: data)
             let user = response.user
+            print("******\(user)")
             return user
         }catch let error {
             print("-->parsing error: \(error.localizedDescription)")

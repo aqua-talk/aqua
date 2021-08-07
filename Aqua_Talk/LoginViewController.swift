@@ -54,14 +54,10 @@ class LoginViewController: UIViewController {
         
 
         //여기부터 서버에 정보를 보내서 true false 값 받아와서 결과 리턴
-        var user:UserInfo?
-        URLSessionAPI.loginUserInfo(emailText!, passwordText!) { userInfo in
-            user = userInfo[0]
-        }
-
-        userViewModel.loadTasks(user!)
+        userViewModel.loadTasks(emailText!, passwordText!)//임시
         //이런 느낌 정확한거아님...
         errorHeight.isActive = true
+        //여기에 조건문 userViewModel의 값이 null이면 실패 아니면 성공으로 조건걸어두고 alert으로 실패했으면 띄워주는거까지 작성해야함
         
         guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
             return

@@ -183,8 +183,8 @@
                                     <action selector="createUser:" destination="ZWx-2j-BEI" eventType="touchUpInside" id="tY0-TP-B7Q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08J-rj-iTg">
-                                <rect key="frame" x="365" y="64" width="30" height="38"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08J-rj-iTg">
+                                <rect key="frame" x="364" y="64" width="30" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="X"/>
                                 <connections>
@@ -257,10 +257,10 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="VLU-2k-rda">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myViewCell" rowHeight="100" id="VLU-2k-rda" customClass="MyViewCell" customModule="Aqua_Talk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.333333969116211" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VLU-2k-rda" id="XQx-aD-zYw">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VLU-2k-rda" id="XQx-aD-zYw" customClass="MyViewCell" customModule="Aqua_Talk" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -293,6 +293,11 @@
                                                 <constraint firstItem="iKq-ze-WH0" firstAttribute="top" secondItem="XQx-aD-zYw" secondAttribute="top" constant="11" id="stI-4k-H1b"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="4fR-cp-Zat" id="ych-Jo-kFL"/>
+                                            <outlet property="profileImage" destination="iKq-ze-WH0" id="vBP-eC-ac3"/>
+                                            <outlet property="statusMessage" destination="m4L-WY-eQm" id="czo-uO-rik"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

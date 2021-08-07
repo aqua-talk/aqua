@@ -8,7 +8,8 @@
 import UIKit
 
 class TalkViewController: UIViewController {
-
+    let userViewModel = UserViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,11 +24,15 @@ extension TalkViewController: UITableViewDelegate {
 }
 extension TalkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "myViewCell", for: indexPath) as? MyViewCell else {
+            return UITableViewCell()
+        }
+        cell.update(info: userViewModel.userInfo)
+        return cell
     }
     
     
