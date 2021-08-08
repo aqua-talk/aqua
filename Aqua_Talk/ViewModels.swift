@@ -21,30 +21,30 @@ class UserViewModel {
 //    }
     private let manager = AquaManager.shared
     
-    var userInfo: UserInfo {
+    var userInfo: UserInfo { //내정보
         return manager.user!
     }
-    var friends: [FriendInfo] {
+    var friends: [FriendInfo] { //친구배열
         return manager.friends
     }
-    var friendsCount: Int {
+    var friendsCount: Int { // 친구수
         return manager.friends.count
     }
-//    var numOfSection: Int {
-//        return Section.allCases.count
-//    }
-    func addFriend(_ friend: FriendInfo) {
+
+    func addFriend(_ friend: FriendInfo) { //친구 추가
         manager.addFriend(friend)
     }
-    
-    func deleteFriend(_ friend: FriendInfo) {
+    func friendInfo(at index: Int) -> FriendInfo{ //친구정보
+        return manager.friends[index]
+    }
+    func deleteFriend(_ friend: FriendInfo) { //친구제거
         manager.deleteFriend(friend)
     }
     
-    func updateUser(_ user: UserInfo) {
+    func updateUser(_ user: UserInfo) { //내정보 업데이트
         manager.updateUser(user)//구현안해놨음
     }
-    func loadTasks(_ email:String, _ password: String) {
+    func loadTasks(_ email:String, _ password: String) { //로그인시 정보 받아오기
         manager.loadUser(email, password)
     }
 }
