@@ -30,7 +30,6 @@ struct UserInfo: Codable {
         case statusMessage
         case profile
         case firends
-        
     }
 }
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		35A0187F269AAE760005B28B /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0187E269AAE760005B28B /* UserInfoModel.swift */; };
 		35A5DB1A26BC115E0057AFAA /* TalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A5DB1926BC115E0057AFAA /* TalkViewController.swift */; };
 		35CAD24A26B51583001B3459 /* URLSessionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CAD24926B51583001B3459 /* URLSessionAPI.swift */; };
+		C426303154C4A6D965CAC27E /* Pods_Aqua_Talk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26728BBC5B6BC04817FE086 /* Pods_Aqua_Talk.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,9 @@
 		35A0187E269AAE760005B28B /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		35A5DB1926BC115E0057AFAA /* TalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkViewController.swift; sourceTree = "<group>"; };
 		35CAD24926B51583001B3459 /* URLSessionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAPI.swift; sourceTree = "<group>"; };
+		A64A7AEAAA5D16455D7B7908 /* Pods-Aqua_Talk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aqua_Talk.release.xcconfig"; path = "Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk.release.xcconfig"; sourceTree = "<group>"; };
+		C9BF2B54908002263D16E39B /* Pods-Aqua_Talk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aqua_Talk.debug.xcconfig"; path = "Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk.debug.xcconfig"; sourceTree = "<group>"; };
+		E26728BBC5B6BC04817FE086 /* Pods_Aqua_Talk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aqua_Talk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C426303154C4A6D965CAC27E /* Pods_Aqua_Talk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +86,8 @@
 			children = (
 				353707F8268A0395005543E9 /* Aqua_Talk */,
 				353707F7268A0395005543E9 /* Products */,
+				C708EE098AE8925B1409C98F /* Pods */,
+				571513BE035EA3B03AB3AFDA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +117,23 @@
 			path = Aqua_Talk;
 			sourceTree = "<group>";
 		};
+		571513BE035EA3B03AB3AFDA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E26728BBC5B6BC04817FE086 /* Pods_Aqua_Talk.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C708EE098AE8925B1409C98F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C9BF2B54908002263D16E39B /* Pods-Aqua_Talk.debug.xcconfig */,
+				A64A7AEAAA5D16455D7B7908 /* Pods-Aqua_Talk.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,9 +141,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3537080A268A0397005543E9 /* Build configuration list for PBXNativeTarget "Aqua_Talk" */;
 			buildPhases = (
+				008FFDDA6D8746A1B3D75156 /* [CP] Check Pods Manifest.lock */,
 				353707F2268A0395005543E9 /* Sources */,
 				353707F3268A0395005543E9 /* Frameworks */,
 				353707F4268A0395005543E9 /* Resources */,
+				7047C1184F954619C2A2A68B /* [CP] Embed Pods Frameworks */,
+				4AAD043C3EB4B9C60B94852B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -175,6 +202,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		008FFDDA6D8746A1B3D75156 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Aqua_Talk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4AAD043C3EB4B9C60B94852B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7047C1184F954619C2A2A68B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		353707F2268A0395005543E9 /* Sources */ = {
@@ -335,6 +421,7 @@
 		};
 		3537080B268A0397005543E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9BF2B54908002263D16E39B /* Pods-Aqua_Talk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -354,6 +441,7 @@
 		};
 		3537080C268A0397005543E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A64A7AEAAA5D16455D7B7908 /* Pods-Aqua_Talk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

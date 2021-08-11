@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
 
@@ -14,7 +15,11 @@ class LoginViewController: UIViewController {
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var singupLabel: UILabel!
+    @IBAction func googleSignIn(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
     
+    var loginBtn = GIDSignInButton()
     let userViewModel = UserViewModel()
     let loginStyoryboard = UIStoryboard(name: "Main", bundle: nil)
     let regularExpression = RegularExpression()
@@ -26,6 +31,9 @@ class LoginViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self // 로그인화면 불러오기
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn() // 자동로그인
         
         loginButton.isEnabled = false
         errorHeight = errorLabel.heightAnchor.constraint(equalToConstant: 0)

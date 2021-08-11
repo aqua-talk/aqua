@@ -45,7 +45,7 @@ class URLSessionAPI {
     static func loginUserInfo(_ email: String, _ password: String ,completion: @escaping ([UserInfo]) -> Void) {
         let session = URLSession(configuration: .default)
         
-        var urlComponents = URLComponents(string: "http://18.119.30.174:3000")!
+        var urlComponents = URLComponents(string: "http://18.119.30.174:3000/")!
 //        let emailQuery = URLQueryItem(name: "email(미정임)", value: email)
 //        let passwordQuery = URLQueryItem(name: "password(미정)", value: password)
 //        
