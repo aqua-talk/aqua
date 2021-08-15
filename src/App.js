@@ -1,60 +1,24 @@
-import React, { useState } from "react";
-import Login from "./components/Login.js";
-import Register from "./components/Register.js";
-import Messenger from "./components/Messenger.js";
+import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  console.log("------ function App 실행 ------");
-  const [layout, setLayout] = useState("login"); // login: 로그인, register: 회원가입, messenger: 친구목록, 채팅목록
-  const [user, setUser] = useState({ id: "", pw: "" });
-
-  // 새로고침할때 로그인 정보가 없어지는 것을 방지
-  // function localCheck() {
-  //   let isSignedIn = localStorage.getItem("signedIn?");
-  //   if (isSignedIn) {
-  //     setLayout("messenger");
-  //   } else {
-  //     setLayout("login");
-  //   }
-  // }
-  // localCheck();
-
-  let userInterface = null;
-  switch (layout) {
-    case "login":
-      userInterface = (
-        <Login
-          getUser={function (user) {
-            setUser(user);
-            // localStorage.setItem("signedIn?", true);
-          }}
-          changeUI={function (next) {
-            switch (next) {
-              case "register":
-                setLayout("register");
-                break;
-              case "messenger":
-                setLayout("messenger");
-                break;
-              default:
-            }
-          }}
-        ></Login>
-      );
-      break;
-
-    case "register":
-      userInterface = <Register></Register>;
-      break;
-
-    case "messenger":
-      userInterface = <Messenger user={user}></Messenger>;
-      break;
-
-    default:
-  }
-  return <div className="App">{userInterface}</div>;
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>깃 브랜치 머지 테스트입니다.</p>
+        <p>깃 브랜치 머지 테스트입니다.</p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
 export default App;
