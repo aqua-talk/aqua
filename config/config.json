@@ -1,0 +1,10 @@
+{
+    "development": {
+        "username": "xogur1212",
+        "password": "6647784",
+        "database": "aquatalk",
+        "host": "3.38.71.214",
+        "dialect": "mysql",
+        "operatorAliases": false
+    }
+}
