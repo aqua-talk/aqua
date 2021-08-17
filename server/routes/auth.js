@@ -1,24 +1,24 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var path = require('path');
-var fs = require('fs');
-var sanitizeHtml = require('sanitize-html');
-var template = require('../lib/template.js');
-var shortId=require('shortid')
-
-
-
+var path = require("path");
+var fs = require("fs");
+var sanitizeHtml = require("sanitize-html");
+var template = require("../lib/template.js");
+var shortId = require("shortid");
 
 module.exports = function (passport) {
-  router.get('/login', function (request, response) {
+  router.get("/login", function (request, response) {
     var fmsg = request.flash();
-    var feedback = '';
+    var feedback = "";
     if (fmsg.error) {
       feedback = fmsg.error[0];
     }
-    var title = 'WEB - login';
+    var title = "WEB - login";
     var list = template.list(request.list);
-    var html = template.HTML(title, list, `
+    var html = template.HTML(
+      title,
+      list,
+      `
       <div style="color:red;">${feedback}</div>
       <form action="/auth/login_process" method="post">
         <p><input type="text" name="email" placeholder="email"></p>
@@ -27,33 +27,40 @@ module.exports = function (passport) {
           <input type="submit" value="login">
         </p>
       </form>
-    `, '');
+    `,
+      ""
+    );
     response.send(html);
   });
 
-  router.post('/login_process',
-  passport.authenticate('local', {
-    failureRedirect: '/auth/login'
+  router.post(
+    "/login_process",
+
+    passport.authenticate("local", {
+      failureRedirect: "/auth/login",
     }),
     (req, res, next) => {
-    req.session.save((err) => {
-    if (err) {
-    next(err);
+      req.session.save((err) => {
+        if (err) {
+          next(err);
+        }
+        res.redirect("/");
+      });
     }
-    res.redirect('/');
-    })
-    }
-    );
+  );
 
-    router.get('/register', function (request, response) {
-      var fmsg = request.flash();
-      var feedback = '';
-      if (fmsg.error) {
-        feedback = fmsg.error[0];
-      }
-      var title = 'WEB - register';
-      var list = template.list(request.list);
-      var html = template.HTML(title, list, `
+  router.get("/register", function (request, response) {
+    var fmsg = request.flash();
+    var feedback = "";
+    if (fmsg.error) {
+      feedback = fmsg.error[0];
+    }
+    var title = "WEB - register";
+    var list = template.list(request.list);
+    var html = template.HTML(
+      title,
+      list,
+      `
         <div style="color:red;">${feedback}</div>
         <form action="/auth/register_process" method="post">
           <p><input type="text" name="email" placeholder="email" value="2"></p>
@@ -64,10 +71,12 @@ module.exports = function (passport) {
             <input type="submit" value="register">
           </p>
         </form>
-      `, '');
-      response.send(html);
-    });
-/*
+      `,
+      ""
+    );
+    response.send(html);
+  });
+  /*
     router.post('/register_process', function (request, response) {   //register/process로 하는것이 restapi 에서의 추천
    
       var post = request.body;
@@ -100,12 +109,12 @@ module.exports = function (passport) {
 
 */
 
-  router.get('/logout', function (request, response) {
+  router.get("/logout", function (request, response) {
     request.logout();
     request.session.save(function () {
-      response.redirect('/');
+      response.redirect("/");
     });
   });
 
   return router;
-}
+};
