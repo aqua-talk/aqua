@@ -11,22 +11,21 @@ function TabPanel(props) {
         left: 0,
         bottom: 0,
         width: 60,
-        height: "100vh",
         paddingTop: 30,
-        backgroundColor: "#ececec",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
+        backgroundColor: "#ececec",
       }}
     >
       <ul
         style={{
           padding: 0,
-          height: 150,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
+          gap: 30,
           alignItems: "center",
         }}
       >
