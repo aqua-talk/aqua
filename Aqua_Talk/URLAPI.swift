@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import Alamofire
+//여기부터 다시 다 수정할거임
 class URLSessionAPI {
     
     static func createUser(_ email: String, _ name: String, _ password: String) {
@@ -162,6 +163,53 @@ class URLSessionAPI {
     }
 
 }
+//여기까지
+
+class GoogleSession {
+    static func googleLogin(){ // 여기에 escaping추가해야함
+        let user = AppDelegate.user
+        
+        let loginParameter = [
+            "email": user!.profile.email!,
+            "userId": user!.userID!,
+            "userName": user!.profile.name!,
+            "GToken": user!.authentication.accessToken!
+        ]
+        Alamofire.request("serverURL", method: .post, parameters: loginParameter, encoding: URLEncoding.default, headers: ["Content-Type":"application/json", "Accept":"application/json"])
+            .validate(statusCode: 200..<300)
+            .responseJSON { (response) in switch response.result {
+            case .success(let jsonvalue):
+                do{
+                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+//                    let value = ViewController.parseUserInfo(data)
+                    
+                }
+                catch let error{
+                    print("-->parsing error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+//    static func parseGUserInfo(_ data: Data) -> [Values] {
+//        let decoder = JSONDecoder()
+//
+//        do {
+//            let response = try decoder.decode(Response.self, from: data)
+//            let user = response.value
+//            print("******\(user)")
+//            return user
+//        }catch let error {
+//            print("-->parsing error: \(error.localizedDescription)")
+//            return []
+//        }
+//    }
+}
+
+
+
+
 
 struct UserInfoResponse: Codable {
     let resultCount: Int

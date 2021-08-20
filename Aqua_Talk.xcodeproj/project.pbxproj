@@ -21,7 +21,7 @@
 		3583BB7826BABC5000E7C505 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3583BB7726BABC5000E7C505 /* FriendsViewController.swift */; };
 		35A0187F269AAE760005B28B /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0187E269AAE760005B28B /* UserInfoModel.swift */; };
 		35A5DB1A26BC115E0057AFAA /* TalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A5DB1926BC115E0057AFAA /* TalkViewController.swift */; };
-		35CAD24A26B51583001B3459 /* URLSessionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CAD24926B51583001B3459 /* URLSessionAPI.swift */; };
+		35CAD24A26B51583001B3459 /* URLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CAD24926B51583001B3459 /* URLAPI.swift */; };
 		C426303154C4A6D965CAC27E /* Pods_Aqua_Talk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26728BBC5B6BC04817FE086 /* Pods_Aqua_Talk.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +42,7 @@
 		3583BB7726BABC5000E7C505 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		35A0187E269AAE760005B28B /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		35A5DB1926BC115E0057AFAA /* TalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkViewController.swift; sourceTree = "<group>"; };
-		35CAD24926B51583001B3459 /* URLSessionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAPI.swift; sourceTree = "<group>"; };
+		35CAD24926B51583001B3459 /* URLAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAPI.swift; sourceTree = "<group>"; };
 		A64A7AEAAA5D16455D7B7908 /* Pods-Aqua_Talk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aqua_Talk.release.xcconfig"; path = "Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk.release.xcconfig"; sourceTree = "<group>"; };
 		C9BF2B54908002263D16E39B /* Pods-Aqua_Talk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aqua_Talk.debug.xcconfig"; path = "Target Support Files/Pods-Aqua_Talk/Pods-Aqua_Talk.debug.xcconfig"; sourceTree = "<group>"; };
 		E26728BBC5B6BC04817FE086 /* Pods_Aqua_Talk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aqua_Talk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +112,7 @@
 				35370807268A0397005543E9 /* Info.plist */,
 				35A0187E269AAE760005B28B /* UserInfoModel.swift */,
 				3521D1FB26B2E98700DFC826 /* ViewModels.swift */,
-				35CAD24926B51583001B3459 /* URLSessionAPI.swift */,
+				35CAD24926B51583001B3459 /* URLAPI.swift */,
 			);
 			path = Aqua_Talk;
 			sourceTree = "<group>";
@@ -271,7 +271,7 @@
 				3521D1FC26B2E98700DFC826 /* ViewModels.swift in Sources */,
 				353707FE268A0395005543E9 /* LoginViewController.swift in Sources */,
 				3529325226BF919300253EE8 /* FriendsTableViewCell.swift in Sources */,
-				35CAD24A26B51583001B3459 /* URLSessionAPI.swift in Sources */,
+				35CAD24A26B51583001B3459 /* URLAPI.swift in Sources */,
 				353707FA268A0395005543E9 /* AppDelegate.swift in Sources */,
 				3529324F26BE395700253EE8 /* TableViewCell.swift in Sources */,
 				357D3A3A2699D9B900ED5A6D /* SingUpViewController.swift in Sources */,

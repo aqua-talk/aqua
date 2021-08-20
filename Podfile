@@ -8,4 +8,6 @@ target 'Aqua_Talk' do
   # Pods for Aqua_Talk
 
 pod 'GoogleSignIn'
+pod 'Alamofire', '~> 4.4'
+
 end
