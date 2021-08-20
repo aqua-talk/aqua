@@ -1,5 +1,4 @@
 import React from "react";
-import { BiSearch, BiUserPlus } from "react-icons/bi";
 
 function MoreHeader() {
   return (

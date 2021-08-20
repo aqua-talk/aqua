@@ -1,14 +1,14 @@
 import React from "react";
 import { Image } from "react-bootstrap";
-import testProfileImage from "../../../../assets/images/testProfileImage.jpg";
+import testProfileImage from "../../../../assets/images/testProfileImage.jpg"; // 임시
 
 function MyProfile() {
-  let userName = "김현";
-  let userStatusMessage = "test";
+  let userName = "김현"; // 임시
+  let userStatusMessage = "test"; // 임시
   return (
     <div style={{ padding: "10px 0" }}>
       <div style={{ display: "flex", justifyContent: "left" }}>
-        <Image src={testProfileImage} width={50} roundedCircle />
+        <Image src={testProfileImage} width={60} roundedCircle style={{ cursor: "pointer" }} />
         <div
           style={{
             marginLeft: 10,
