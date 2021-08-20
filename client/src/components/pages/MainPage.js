@@ -20,6 +20,8 @@ function MainPage() {
         return <ChatPanel />;
       case "more":
         return <MorePanel />;
+      default:
+        alert("something wrong..");
     }
   };
 
