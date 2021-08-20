@@ -9,6 +9,7 @@ function FriendPanel() {
   return (
     <div
       style={{
+        marginLeft: 60,
         width: "100%",
         padding: "0 20px",
         boxSizing: "border-box",

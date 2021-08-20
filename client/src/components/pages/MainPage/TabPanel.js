@@ -6,6 +6,10 @@ function TabPanel(props) {
   return (
     <nav
       style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        bottom: 0,
         width: 60,
         height: "100vh",
         paddingTop: 30,
@@ -27,25 +31,28 @@ function TabPanel(props) {
         }}
       >
         <li
+          style={{ cursor: "pointer" }}
           onClick={() => {
             props.handleTab("friend");
           }}
         >
-          <BsPersonFill size={30} color={props.tab == "friend" ? null : "#acacac"} />
+          <BsPersonFill size={30} color={props.tab === "friend" ? null : "#acacac"} />
         </li>
         <li
+          style={{ cursor: "pointer" }}
           onClick={() => {
             props.handleTab("chat");
           }}
         >
-          <BsFillChatFill size={30} color={props.tab == "chat" ? null : "#acacac"} />
+          <BsFillChatFill size={30} color={props.tab === "chat" ? null : "#acacac"} />
         </li>
         <li
+          style={{ cursor: "pointer" }}
           onClick={() => {
             props.handleTab("more");
           }}
         >
-          <BsThreeDots size={30} color={props.tab == "more" ? null : "#acacac"} />
+          <BsThreeDots size={30} color={props.tab === "more" ? null : "#acacac"} />
         </li>
       </ul>
       <ul></ul>
