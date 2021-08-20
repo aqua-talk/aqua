@@ -1,6 +1,8 @@
 /* 기본 서버 구동 셋팅 */
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors());
 const http = require("http");
 const server = http.createServer(app);
 const PORT = 3002;

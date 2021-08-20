@@ -5,6 +5,7 @@ import ChatList from "./ChatPanel/ChatList";
 
 function ChatPanel() {
   const [messageTotal, setMessageTotal] = useState(0);
+
   return (
     <div
       style={{

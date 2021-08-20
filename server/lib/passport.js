@@ -2,6 +2,16 @@ var shortid = require("shortid");
 var { User } = require("../models");
 
 module.exports = function (app) {
+  // router.get('/', function (req, res, next) {
+  //     user.find({
+  //         where: {
+  //             id: 1
+  //         }
+  //     }).then((user) => {
+  //         res.send(user.useremail);
+  //     });
+  // });
+
   var passport = require("passport"),
     LocalStrategy = require("passport-local").Strategy,
     GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
@@ -16,6 +26,8 @@ module.exports = function (app) {
   });
 
   passport.deserializeUser(function (id, done) {
+    console.log("id", id);
+
     User.findOne({ where: { id: id } }).then((project) => {
       //세션이랑 체크함
       //  console.log("work",project)
@@ -23,6 +35,7 @@ module.exports = function (app) {
       //     id: id
       //  }).value()
       //  console.log('deserializeUser', id,"datavalues", project.dataValues)
+
       done(null, project);
       // project는 Project 테이블에서 title이 'aProject'인 첫번째 항목 || 또는 null
     });
@@ -42,25 +55,23 @@ module.exports = function (app) {
         passwordField: "pwd",
       },
       function (email, password, done) {
-        console.log("localStrategy", email, password);
-        /*
-        var user =
-
-        db.get('users').find({
+        console.log("localStreagy", email, password);
+        var user = db
+          .get("users")
+          .find({
             email: email,
-            password: password
-        }).value(); //key:value
-
+            password: password,
+          })
+          .value(); //key:value
         if (user) {
-            return done(null, user, {
-                message: 'Welcome.'
-            });
+          return done(null, user, {
+            message: "Welcome.",
+          });
         } else {
-            return done(null, false, {
-                message: 'Incorrect user information.'
-            });
+          return done(null, false, {
+            message: "Incorrect user information.",
+          });
         }
-            */
       }
     )
   );
@@ -73,31 +84,16 @@ module.exports = function (app) {
         clientID: googleCredentials.web.client_id,
         clientSecret: googleCredentials.web.client_secret,
         callbackURL: googleCredentials.web.redirect_uris[0],
+        passReqToCallback: true,
       },
-      function (accessToken, refreshToken, profile, done) {
+      function (request, accessToken, refreshToken, profile, done) {
         //  console.log('Googlestragey', accessToken, refreshToken, profile)
         var email = profile.emails[0].value;
-        console.log("email is ", email);
-        // var user = db.get('users').find({
-        //     email: email
-        // }).value();
-        // if (user) {
-        //     user.googleId = profile.id;
-        //     db.get('users').find({
-        //         id: user.id
-        //     }).assign(user).write();
-        // } else {
-        //     user = {
-        //         id: shortid.generate(),
-        //         email: email,
-        //         displayName: profile.displayName,
-        //         googleId: profile.id
+        console.log("email is ", profile._json);
+        request.id = profile._json;
+        //console.log("accaccess",request.accessToken);
 
-        //     }
-        //     //.FindOrCreate(options: Object)
-        //     db.get('users').push(user).write();
-        // }
-        var user = {
+        user = {
           id: shortid.generate(),
           email: email,
           displayName: profile.displayName,
@@ -110,7 +106,7 @@ module.exports = function (app) {
         })
           .then((rows) => {
             //done(null, rows)
-            // console.log("thenrow",rows[0])
+            //  console.log("thenrow",rows)
             done(null, rows[0]);
           })
           .catch((err) => {
@@ -126,10 +122,17 @@ module.exports = function (app) {
       }
     )
   );
-  app.get("/auth/google", (req, res, next) => {
-    console.log("성공");
-    next();
-  });
+  /*
+app.get('/auth/google',(req,res,next) =>{
+    if(req.user){
+        res.json(isLogin=true)
+    }
+    else{
+        next();  
+    }
+   
+})
+*/
   app.get(
     "/auth/google",
     passport.authenticate("google", {
@@ -146,7 +149,8 @@ module.exports = function (app) {
     function (req, res) {
       req.session.save(function () {
         //console.log()
-        res.redirect("/");
+        //                res.redirect('http://localhost:3002');
+        res.json({ id: req.id.email });
       });
       // res.redirect('/');
     }
