@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleSignIn
+import Alamofire
 
 class LoginViewController: UIViewController {
 
@@ -15,9 +16,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var singupLabel: UILabel!
-    @IBAction func googleSignIn(_ sender: Any) {
-        GIDSignIn.sharedInstance()?.signIn()
-    }
+    
     
     var loginBtn = GIDSignInButton()
     let userViewModel = UserViewModel()
@@ -25,15 +24,20 @@ class LoginViewController: UIViewController {
     let regularExpression = RegularExpression()
     var errorHeight: NSLayoutConstraint!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        //서버랑연결
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance()?.presentingViewController = self // 로그인화면 불러오기
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn() // 자동로그인
+        if AppDelegate.loginToken {
+            guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+                print("??")
+                return
+            }
+            print("!1111")
+            self.navigationController?.pushViewController(homeVC, animated: true)
+        }
+
         
         loginButton.isEnabled = false
         errorHeight = errorLabel.heightAnchor.constraint(equalToConstant: 0)
@@ -45,6 +49,10 @@ class LoginViewController: UIViewController {
     }
 
 
+    
+    @IBAction func googleSignIn(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
     @IBAction func loginButton(_ sender: UIButton) {
         let emailText = emailTextField.text
         let passwordText = passwordTextField.text
@@ -68,6 +76,7 @@ class LoginViewController: UIViewController {
         //여기에 조건문 userViewModel의 값이 null이면 실패 아니면 성공으로 조건걸어두고 alert으로 실패했으면 띄워주는거까지 작성해야함
         
         guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+            print("123")
             return
         }
         self.navigationController?.pushViewController(homeVC, animated: true)
@@ -123,4 +132,5 @@ class RegularExpression {
         return result != nil
     }
 }
+
 

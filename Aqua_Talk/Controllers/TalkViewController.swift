@@ -8,7 +8,7 @@
 import UIKit
 
 class TalkViewController: UIViewController {
-    let userViewModel = UserViewModel()
+//    let userViewModel = UserViewModel()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,7 +27,7 @@ extension TalkViewController: UITableViewDelegate {
 }
 extension TalkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userViewModel.friendsCount+1
+        return 1//userViewModel.friendsCount+1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -35,15 +35,15 @@ extension TalkViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "friendsTableViewCell", for: indexPath) as? FriendsTableViewCell else {
                 return UITableViewCell()
             }
-            let friendInfo = userViewModel.friendInfo(at: indexPath.row-1)
-            cell.update(info: friendInfo)
+//            let friendInfo = userViewModel.friendInfo(at: indexPath.row-1)
+//            cell.update(info: friendInfo)
             return cell
         }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "myTableViewCell", for: indexPath) as? MyTableViewCell else {
             return UITableViewCell()
         }
-        cell.update(info: userViewModel.userInfo)
+//        cell.update(info: userViewModel.userInfo)
         return cell
     }
     

@@ -175,12 +175,12 @@ class GoogleSession {
             "userName": user!.profile.name!,
             "GToken": user!.authentication.accessToken!
         ]
-        Alamofire.request("serverURL", method: .post, parameters: loginParameter, encoding: URLEncoding.default, headers: ["Content-Type":"application/json", "Accept":"application/json"])
-            .validate(statusCode: 200..<300)
+        Alamofire.request("http://192.168.25.3:3000/api/login/info", method: .post, parameters: loginParameter)
+                    .validate(statusCode: 200..<300)
             .responseJSON { (response) in switch response.result {
             case .success(let jsonvalue):
                 do{
-                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+//                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
 //                    let value = ViewController.parseUserInfo(data)
                     
                 }
@@ -188,7 +188,7 @@ class GoogleSession {
                     print("-->parsing error: \(error.localizedDescription)")
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                print("===========\(error.localizedDescription)")
             }
         }
     }
