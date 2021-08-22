@@ -5,6 +5,7 @@
 //   isLoading: true,
 // };
 
+
 const initialUserState = {
   id: null,
   email: null,
@@ -13,6 +14,7 @@ const initialUserState = {
 };
 
 export default function (state = initialUserState, action) {
+
   return null;
   // switch (action.type) {
   //   case SET_USER:
