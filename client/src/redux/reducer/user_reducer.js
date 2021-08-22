@@ -5,7 +5,16 @@
 //   isLoading: true,
 // };
 
-export default function (/*state = initialUserState, action*/) {
+
+const initialUserState = {
+  id: null,
+  email: null,
+  displayName: null,
+  googleId: null,
+};
+
+export default function (state = initialUserState, action) {
+
   return null;
   // switch (action.type) {
   //   case SET_USER:

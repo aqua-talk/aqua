@@ -5,9 +5,6 @@ import { Button } from "react-bootstrap";
 function LoginPage(props) {
   return (
     <div>
-      {/* <Button variant="primary" href="http://localhost:3002/auth/google">
-        구글
-      </Button> */}
 
       <Button
         variant="primary"
@@ -15,8 +12,10 @@ function LoginPage(props) {
           axios
             .get("/auth/google")
             .then(function (response) {
-              console.log("response");
-              props.login(true);
+
+              console.log("로그인 성공(loginprocess로)", response);
+              //여기서 바로 redirect?
+
             })
             .catch(function (error) {
               console.log("실패");
