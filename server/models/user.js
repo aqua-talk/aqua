@@ -1,28 +1,29 @@
-module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('user', {
-        id :{
-            /* column 속성들 */
-            type: DataTypes.STRING(30),
-            allowNull: false,
-            unique: true,
-            primaryKey:true
-            /* 여기까지 */
-        },
-        email: {
-            type: DataTypes.STRING(100),
-            allowNull: false,
-            unique: true,
-        },
-        displayName: {
-            type: DataTypes.STRING(100),
-            allowNull: false,
-        },
-        googleId: {
-            type: DataTypes.STRING(100),
-            allowNull: false,
-        }
-    }, {
-        timestamps: false,
-    });
-}
+const Sequelize = require('sequelize');
 
+module.exports = ((sequelize,DataTypes)=>{
+    return sequelize.define('user',{
+        email:{
+            type: Sequelize.STRING(100),
+            allowNull: false,
+            primaryKey: true,
+        },
+        userid:{
+            type: Sequelize.STRING(100  ),
+            allowNull: false,
+        },
+        username:{
+            type: Sequelize.STRING(100),
+            allowNull: false, // 카카오 로그인은 비번 필요없으니,,
+        },
+        gtoken :{ // 뭐로 로그인 했는지 : 카카오, 로컬,,
+            type: Sequelize.STRING(1000),
+            allowNull: false,
+            
+        },
+       
+
+    },{
+        timestamps:true,
+        paranoid : true, // 삭제일 (복구용)
+    })
+})
