@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import TabPanel from "./MainPage/TabPanel";
 import FriendPanel from "./MainPage/FriendPanel";
@@ -7,17 +8,18 @@ import MorePanel from "./MainPage/MorePanel";
 
 function MainPage() {
   const [tab, setTab] = useState("friend");
-
   const handleTab = (thisTab) => {
     setTab(thisTab);
   };
 
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   const renderMainPanel = () => {
     switch (tab) {
       case "friend":
-        return <FriendPanel />;
+        return <FriendPanel user={currentUser} />;
       case "chat":
-        return <ChatPanel />;
+        return <ChatPanel user={currentUser} />;
       case "more":
         return <MorePanel />;
       default:
