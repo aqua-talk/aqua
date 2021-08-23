@@ -18,7 +18,6 @@ class LoginViewController: UIViewController {
     @IBOutlet var singupLabel: UILabel!
     
     
-    var loginBtn = GIDSignInButton()
     let userViewModel = UserViewModel()
     let loginStyoryboard = UIStoryboard(name: "Main", bundle: nil)
     let regularExpression = RegularExpression()
@@ -27,17 +26,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self // 로그인화면 불러오기
-        if AppDelegate.loginToken {
-            guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
-                print("??")
-                return
-            }
-            print("!1111")
-            self.navigationController?.pushViewController(homeVC, animated: true)
-        }
-
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn() // 자동로그인
         
         loginButton.isEnabled = false
         errorHeight = errorLabel.heightAnchor.constraint(equalToConstant: 0)
@@ -47,12 +38,16 @@ class LoginViewController: UIViewController {
         singupLabel.isUserInteractionEnabled = true
         singupLabel.addGestureRecognizer(tab)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
 
 
     
     @IBAction func googleSignIn(_ sender: Any) {
         GIDSignIn.sharedInstance()?.signIn()
     }
+    
     @IBAction func loginButton(_ sender: UIButton) {
         let emailText = emailTextField.text
         let passwordText = passwordTextField.text
@@ -76,7 +71,6 @@ class LoginViewController: UIViewController {
         //여기에 조건문 userViewModel의 값이 null이면 실패 아니면 성공으로 조건걸어두고 alert으로 실패했으면 띄워주는거까지 작성해야함
         
         guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
-            print("123")
             return
         }
         self.navigationController?.pushViewController(homeVC, animated: true)
@@ -133,4 +127,98 @@ class RegularExpression {
     }
 }
 
+
+extension LoginViewController: GIDSignInDelegate {
+    public static var user: GIDGoogleUser!
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            if(error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("not signed in before or signed out")
+            } else {
+                print(error.localizedDescription)
+            }
+        }
+
+        // singleton 객체 - user가 로그인을 하면, AppDelegate.user로 다른곳에서 사용 가능
+        LoginViewController.user = user
+        print(user!.profile.email!)
+        let loginParameter = [
+            "email": user!.profile.email!,
+            "userid": user!.userID!,
+            "username": user!.profile.name!,
+            "gtoken": user!.authentication.accessToken!
+        ]
+
+        
+        //======================
+        self.userViewModel.googleUserLoadTask(userInfo: UserInfo())// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
+        print("friendCount===>\(userViewModel.friendsCount)")
+        guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+            return
+        }
+        
+        self.navigationController?.pushViewController(homeVC, animated: true)
+        
+        //======================
+//        Alamofire.request("http://3.38.107.175:3000/api/login/info", method: .post, parameters: loginParameter)
+//                    .validate(statusCode: 200..<300)
+//            .responseJSON { (response) in switch response.result {
+//            case .success(let jsonvalue):
+//                do{
+//                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+//                    let value = LoginViewController.parseGUserInfo(data)
+////                    print(value)
+//                    self.userViewModel.googleUserLoadTask(userInfo: UserInfo())// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
+//                    //====================== 화면 전환
+//                    guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+//                        return
+//                    }
+//
+//                    self.navigationController?.pushViewController(homeVC, animated: true)
+//                    //======================
+//                }
+//                catch let error{
+//                    print("-->parsing error: \(error.localizedDescription)")
+//                }
+//            case .failure(let error):
+//                print("===========\(error.localizedDescription)")
+//            }
+//        }
+        return
+    }
+    
+    
+    static func parseGUserInfo(_ data: Data) -> testResonse {
+            let decoder = JSONDecoder()
+            do {
+                let response = try decoder.decode(testResonse.self, from: data)
+                let user = response
+                print("******\(user)")
+                return user
+            }catch let error {
+                print("-->parsing error: \(error.localizedDescription)")
+                return testResonse();
+            }
+        }
+
+}
+
+struct testResonse: Codable {
+    let email: String
+    let userid: String
+    let username: String
+    let token: String
+    init(){
+        email = ""
+        userid = ""
+        username = ""
+        token = ""
+    }
+    enum CodingKeys: String, CodingKey {
+        case email
+        case userid
+        case username
+        case token
+    }
+}
 

@@ -25,28 +25,32 @@ class UserViewModel {
         return manager.user!
     }
     var friends: [FriendInfo] { //친구배열
-        return manager.friends
+        return (manager.user?.firends)!
     }
     var friendsCount: Int { // 친구수
-        return manager.friends.count
+        return manager.user?.firends?.count ?? 0
     }
-
-    func addFriend(_ friend: FriendInfo) { //친구 추가
-        manager.addFriend(friend)
-    }
+//
+//    func addFriend(_ friend: FriendInfo) { //친구 추가
+//        manager.addFriend(friend)
+//    }
     func friendInfo(at index: Int) -> FriendInfo{ //친구정보
-        return manager.friends[index]
+        return (manager.user?.firends![index])!
     }
-    func deleteFriend(_ friend: FriendInfo) { //친구제거
-        manager.deleteFriend(friend)
-    }
-    
-    func updateUser(_ user: UserInfo) { //내정보 업데이트
-        manager.updateUser(user)//구현안해놨음
+//    func deleteFriend(_ friend: FriendInfo) { //친구제거
+//        manager.deleteFriend(friend)
+//    }
+//
+//    func updateUser(_ user: UserInfo) { //내정보 업데이트
+//        manager.updateUser(user)//구현안해놨음
+//    }
+    func googleUserLoadTask(userInfo: UserInfo){
+        manager.googleUserLoad(userInfo: userInfo)
     }
     func loadTasks(_ email:String, _ password: String) { //로그인시 정보 받아오기
-        manager.loadUser(email, password)
+//        manager.loadUser(email, password)
     }
+    
 }
 
 class TalkViewModel {

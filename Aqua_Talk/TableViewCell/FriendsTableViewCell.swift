@@ -15,7 +15,8 @@ class FriendsTableViewCell: UITableViewCell {
     @IBOutlet weak var statusMessage: UILabel!
     
     func update(info: FriendInfo) {
-        profileImage.setImageUrl(info.profile!)
+//        profileImage.setImageUrl(info.profile!)
+        profileImage.image = UIImage(named: "chopper.jpg")
         nameLabel.text = info.name
         statusMessage.text = info.statusMessage
     }

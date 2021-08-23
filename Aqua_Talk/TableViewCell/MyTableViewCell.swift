@@ -14,7 +14,8 @@ class MyTableViewCell: UITableViewCell {
     @IBOutlet weak var statusMessage: UILabel!
     
     func update(info: UserInfo) {
-        profileImage.setImageUrl(info.profile!)
+//        profileImage.setImageUrl(info.profile!) ****************
+        profileImage.image = UIImage(named: "luffy.jpg")//여기 지워야함 *****************
         nameLabel.text = info.name
         statusMessage.text = info.statusMessage
     }

@@ -43,33 +43,33 @@ class URLSessionAPI {
 
     
     }
-    static func loginUserInfo(_ email: String, _ password: String ,completion: @escaping ([UserInfo]) -> Void) {
-        let session = URLSession(configuration: .default)
-        
-        var urlComponents = URLComponents(string: "http://18.119.30.174:3000/")!
-//        let emailQuery = URLQueryItem(name: "email(미정임)", value: email)
-//        let passwordQuery = URLQueryItem(name: "password(미정)", value: password)
-//        
-//        urlComponents.queryItems?.append(emailQuery)
-//        urlComponents.queryItems?.append(passwordQuery)
-        let requestURL = urlComponents.url!
-        
-        let dataTask = session.dataTask(with: requestURL) { data, response, error in
-            let successRange = 200..<300
-            
-            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
-                completion([])
-                return
-            }
-            guard let resultData = data else {
-                completion([])
-                return
-            }
-            let userInfo = URLSessionAPI.parseUserInfo(resultData)
-            completion(userInfo)
-        }
-        dataTask.resume()
-    }
+//    static func loginUserInfo(_ email: String, _ password: String ,completion: @escaping ([UserInfo]) -> Void) {
+//        let session = URLSession(configuration: .default)
+//
+//        var urlComponents = URLComponents(string: "http://18.119.30.174:3000/")!
+////        let emailQuery = URLQueryItem(name: "email(미정임)", value: email)
+////        let passwordQuery = URLQueryItem(name: "password(미정)", value: password)
+////
+////        urlComponents.queryItems?.append(emailQuery)
+////        urlComponents.queryItems?.append(passwordQuery)
+//        let requestURL = urlComponents.url!
+//
+//        let dataTask = session.dataTask(with: requestURL) { data, response, error in
+//            let successRange = 200..<300
+//
+//            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
+//                completion([])
+//                return
+//            }
+//            guard let resultData = data else {
+//                completion([])
+//                return
+//            }
+//            let userInfo = URLSessionAPI.parseUserInfo(resultData)
+//            completion(userInfo)
+//        }
+//        dataTask.resume()
+//    }이부분 날릴거임
     
     static func emailVerification(_ email: String, completion: @escaping ([Email]) -> Void) {
         let session = URLSession(configuration: .default)
@@ -123,19 +123,19 @@ class URLSessionAPI {
         }
         dataTask.resume()
     }
-    static func parseUserInfo(_ data: Data) -> [UserInfo] {
-        let decoder = JSONDecoder()
-        
-        do {
-            let response = try decoder.decode(UserInfoResponse.self, from: data)
-            let user = response.user
-            print("******\(user)")
-            return user
-        }catch let error {
-            print("-->parsing error: \(error.localizedDescription)")
-            return []
-        }
-    }
+//    static func parseUserInfo(_ data: Data) -> [UserInfo] {
+//        let decoder = JSONDecoder()
+//
+//        do {
+//            let response = try decoder.decode(UserInfoResponse.self, from: data)
+//            let user = response.user
+//            print("******\(user)")
+//            return user
+//        }catch let error {
+//            print("-->parsing error: \(error.localizedDescription)")
+//            return []
+//        }
+//    }// 여기 날릴거임
     
     static func parseEmails(_ data: Data) -> [Email] {
         let decoder = JSONDecoder()
@@ -163,49 +163,7 @@ class URLSessionAPI {
     }
 
 }
-//여기까지
 
-class GoogleSession {
-    static func googleLogin(){ // 여기에 escaping추가해야함
-        let user = AppDelegate.user
-        
-        let loginParameter = [
-            "email": user!.profile.email!,
-            "userId": user!.userID!,
-            "userName": user!.profile.name!,
-            "GToken": user!.authentication.accessToken!
-        ]
-        Alamofire.request("http://192.168.25.3:3000/api/login/info", method: .post, parameters: loginParameter)
-                    .validate(statusCode: 200..<300)
-            .responseJSON { (response) in switch response.result {
-            case .success(let jsonvalue):
-                do{
-//                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
-//                    let value = ViewController.parseUserInfo(data)
-                    
-                }
-                catch let error{
-                    print("-->parsing error: \(error.localizedDescription)")
-                }
-            case .failure(let error):
-                print("===========\(error.localizedDescription)")
-            }
-        }
-    }
-//    static func parseGUserInfo(_ data: Data) -> [Values] {
-//        let decoder = JSONDecoder()
-//
-//        do {
-//            let response = try decoder.decode(Response.self, from: data)
-//            let user = response.value
-//            print("******\(user)")
-//            return user
-//        }catch let error {
-//            print("-->parsing error: \(error.localizedDescription)")
-//            return []
-//        }
-//    }
-}
 
 
 
