@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-
+var users = require('./../model/user');
 var jwt = require('jsonwebtoken');
 var jwtSecret = 'secret';
 var models = require('../models');
-
+const {
+    deleteOne
+} = require('./../model/user');
 
 /***********************************
  *           FB Login              *
