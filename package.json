@@ -22,7 +22,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "server": "cd server && nodemon server",
+    "server": "cd server && node ./bin/www",
     "client": "cd client && npm start",
     "build": "cd client && npm run build",
     "start": "concurrently \"npm server\" \"npm client\"",

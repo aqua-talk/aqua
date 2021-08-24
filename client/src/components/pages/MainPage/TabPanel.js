@@ -1,6 +1,7 @@
 import React from "react";
 
 import { BsPersonFill, BsFillChatFill, BsThreeDots } from "react-icons/bs";
+import { FaSignOutAlt } from "react-icons/fa";
 
 function TabPanel(props) {
   return (
@@ -54,7 +55,25 @@ function TabPanel(props) {
           <BsThreeDots size={30} color={props.tab === "more" ? null : "#acacac"} />
         </li>
       </ul>
-      <ul></ul>
+      <ul
+        style={{
+          padding: 0,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          gap: 30,
+          alignItems: "center",
+        }}
+      >
+        <li>
+          <FaSignOutAlt
+            size={30}
+            onClick={() => {
+              props.signOut();
+            }}
+          />
+        </li>
+      </ul>
     </nav>
   );
 }

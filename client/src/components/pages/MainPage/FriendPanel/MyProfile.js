@@ -21,7 +21,7 @@ function MyProfile() {
           }}
         >
           <h4 style={{ margin: 0, fontSize: "1rem", fontWeight: 600 }}>
-            {currentUser.displayName}
+            {currentUser && currentUser.display_name}
           </h4>
           {userStatusMessage && <p style={{ margin: 0 }}>{userStatusMessage}</p>}
         </div>
