@@ -1,7 +1,6 @@
 var shortid = require("shortid");
-const url = require('url');   
-var user = require("../model/user");
-const querystring = require('querystring');  
+const url = require('url');
+const querystring = require('querystring');
 var {
     User
 } = require("../models");
@@ -14,7 +13,7 @@ var google_id;
 module.exports = function (app) {
 
 
-   
+
 
     var passport = require("passport"),
         LocalStrategy = require("passport-local").Strategy,
@@ -68,48 +67,18 @@ module.exports = function (app) {
                     displayName: profile.displayName,
                     googleId: profile.id,
                 };
-                id=user.id;
-                email=user.email;
-                display_name=user.displayName,
-                google_id=profile.id
-               
-                /*
-                User.findOrCreate({
-                        where: {
-                            email: email
-                        },
-                        defaults: user,
-                    })
-                    .then((rows) => {
-                        //done(null, rows)
-                        //  console.log("thenrow",rows)
-                        done(null, rows[0]);
-                    })
-                    .catch((err) => {
-                        // Do something
-                    });
-                    */
+                id = user.id;
+                email = user.email;
+                display_name = user.displayName,
+                    google_id = profile.id
+
+              
                 done(null, user)
-                // console.log("email is",email);
-                //   User.findOrCreate({
-                //      googleId: profile.id
-                // }, function (err, user) {
-                //        return done(err, user);
-                //   });
+               
             }
         )
     );
-    /*
-app.get('/auth/google',(req,res,next) =>{
-    if(req.user){
-        res.json(isLogin=true)
-    }
-    else{
-        next();  
-    }
-   
-})
-*/
+
     app.get(
         "/auth/google",
         passport.authenticate("google", {
@@ -124,52 +93,36 @@ app.get('/auth/google',(req,res,next) =>{
             failureRedirect: "/auth/login",
         }),
         function (req, res) {
-           // req.session.save(function () {
-                //console.log()
-              //  const query = querystring.stringify({
-              //      "id": user.id,
-              //      "email": user.email,
-             //       "display_name":user.displayName,
-             //       "google_id":user.googleId
-             //   });
-               // res.redirect('/?' + query);
-                // res.json({ id: req.id.email });
-          //  });
-             res.redirect('/');
+          
+            res.redirect('/');
         }
     );
 
     app.get('/login_process', (req, res) => {
-        console.log('req',req.query.id)
-        console.log('req',req.query.email)
+        console.log('req', req.query.id)
+        console.log('req', req.query.email)
 
-        //res.send(1)
-         //email:req.query.email,
-            //display_name:req.query.display_name,
-           // google_id:req.query.google_id
-        res.json(user_info={
-            id:req.query.id,
-            email:req.query.email,
-            display_name:req.query.display_name,
-            google_id:req.query.google_id
-           
+      
+        res.json(user_info = {
+            id: req.query.id,
+            email: req.query.email,
+            display_name: req.query.display_name,
+            google_id: req.query.google_id
+
         })
     })
     app.get('/user_info', (req, res) => {
-      
 
-        //res.send(1)
-         //email:req.query.email,
-            //display_name:req.query.display_name,
-           // google_id:req.query.google_id
-        res.json({user_info:{
-            id:id,
-            email:email,
-            
-            display_name:display_name,
-            google_id:google_id
-           
-        }})
+        res.json({
+            user_info: {
+                id: id,
+                email: email,
+
+                display_name: display_name,
+                google_id: google_id
+
+            }
+        })
     })
 
 

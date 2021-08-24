@@ -1,18 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
 const cors = require("cors");
-
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-//var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-//var index2Router= require('./routes/index2')
-
 var apiRouter = require('./routes/api');
-var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/token-login-social');
 var {sequelize} = require('./models/index')
 var app = express();
 app.use(cors());
@@ -21,20 +13,18 @@ var bodyParser=require('body-parser')
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
- 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+//USE MIDDLEWARE
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', index2Router);
-//app.use('/auth', indexRouter);
-app.use('/users', usersRouter);
+//USE MYMIDDLEWARE
 app.use('/api',apiRouter);
 
 
