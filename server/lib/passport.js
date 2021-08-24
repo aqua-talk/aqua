@@ -9,9 +9,9 @@ var id;
 var email;
 var display_name;
 var google_id;
-
+const cors = require("cors");
 module.exports = function (app) {
-
+    app.use(cors());
 
 
 
@@ -112,7 +112,9 @@ module.exports = function (app) {
         })
     })
     app.get('/user_info', (req, res) => {
-
+        res.header({
+            "Access-Control-Allow-Origin": "*",
+          });
         res.json({
             user_info: {
                 id: id,
