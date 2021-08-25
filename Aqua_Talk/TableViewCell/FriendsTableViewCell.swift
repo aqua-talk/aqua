@@ -16,9 +16,22 @@ class FriendsTableViewCell: UITableViewCell {
     
     func update(info: FriendInfo) {
 //        profileImage.setImageUrl(info.profile!)
-        profileImage.image = UIImage(named: "chopper.jpg")
+        profileImage.image = UIImage(named: "defaultImage.jpeg")
+        profileImage.layer.cornerRadius = 20
         nameLabel.text = info.name
-        statusMessage.text = info.statusMessage
+//        statusMessage.text = info.statusMessage
+        statusMessage.text = ""
+        if statusMessage.text == ""{
+            nameLabel.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint(item: nameLabel, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+            NSLayoutConstraint(item: nameLabel,
+                               attribute: .centerY,
+                               relatedBy: .equal,
+                               toItem: profileImage,
+                               attribute: .centerY,
+                               multiplier: 1.0,
+                               constant: 0.0).isActive = true
+        }
     }
     override func awakeFromNib() {
         
