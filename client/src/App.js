@@ -5,15 +5,16 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser, clearUser } from "./redux/actions/user_action";
 
-import LoginPage from "./components/pages/LoginPage";
 import MainPage from "./components/pages/MainPage";
+import LoginPage from "./components/pages/LoginPage";
+import RegisterPage from "./components/pages/RegisterPage";
 import Loading from "./components/pages/Loading";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 const domain = "http://www.aqua-talk.shop:3002";
-const root = "/web";
+const root = "";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,28 +22,56 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // App 이 생성될때 '/user_info' 로 유저 정보 요청
     axios
       .get("/user_info")
       .then((response) => {
-        let data = response.data;
-        if (data.user_info.id) {
-          console.log("유저 정보 조회", data.user_info);
-          dispatch(setUser(data.user_info));
+        let userInfo = response.data.user_info;
+        if (userInfo.id) {
+          // user_info에 정보(id)가 담겨있을 경우
+          // store에 저장 후 MainPage로
+          console.log("유저 정보 조회", userInfo);
+          dispatch(setUser(userInfo));
           setIsLoading(false);
-          history.push(root);
+          if (userInfo.name) {
+            // name 임시
+            // user_info에 세부 정보(name)가 담겨있을 경우(최초 Register단계를 거친 경우)
+            history.push(`${root}/`);
+          } else {
+            // Register단계를 거치지 않은 경우
+            history.push(`${root}/register`);
+          }
         } else {
-          console.log("유저 정보 없음", data);
+          // user_info에 정보(id)가 담겨있지 않을 경우(로그인 실패 또는 로그 아웃) 경우
+          // store에서 유저 정보 삭제 후 LoginPage로
+          console.log("유저 정보 없음", response);
           dispatch(clearUser());
           history.push(`${root}/login`);
         }
       })
       .catch(function (error) {
-        alert("유저 정보 요청 실패");
+        // '/user_info'로 유저 정보 요청이 실패한 경우
+        alert(`유저 정보 요청 실패
+        ${error}`);
         history.push(`${root}/login`);
       });
   }, []);
 
+  // 로그아웃 함수
   const signOut = () => {
+    axios
+      .get("/logout") // 임시
+      .then((response) => {
+        console.log("로그아웃 성공");
+        dispatch(clearUser());
+        history.push(`${root}/login`);
+      })
+      .catch(function (error) {
+        alert(`로그아웃실패
+        ${error}`);
+      });
+
+    // 임시
     console.log("로그아웃 성공");
     dispatch(clearUser());
     history.push(`${root}/login`);
@@ -56,6 +85,9 @@ function App() {
         </Route>
         <Route path={`${root}/login`}>
           <LoginPage domain={domain} />
+        </Route>
+        <Route path={`${root}/register`}>
+          <RegisterPage />
         </Route>
       </Switch>
     </div>
