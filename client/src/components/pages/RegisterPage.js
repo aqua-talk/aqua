@@ -1,18 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Form, Button } from "react-bootstrap";
+import mime from "mime-types";
+import { Image } from "react-bootstrap";
+import defaultAvatar from "../../assets/images/user.png";
 
 function RegisterPage() {
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "onSubmit" });
   const initialValues = { name: "", statusMessage: "", profileImage: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState();
+  const [preview, setPreview] = useState();
   const [loading, setLoading] = useState(false);
+
+  const inputOpenImageRef = useRef();
+
+  const handleOpenImageRef = () => {
+    inputOpenImageRef.current.click();
+  };
+
+  const handleUploadImage = async (event) => {
+    const file = event.target.files[0];
+    console.log("type", typeof file, "file", file);
+    const metadata = { contentType: mime.lookup(file.name) };
+    console.log("metadata", metadata, "mime", mime);
+
+    setFormValues({
+      ...formValues,
+      name: "test",
+      profileImage: { file: file, metadata: metadata },
+    });
+    console.log(formValues);
+    debugger;
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -57,7 +80,7 @@ function RegisterPage() {
           marginBottom: 30,
         }}
       >
-        회원 가입
+        프로필 정보
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -96,12 +119,30 @@ function RegisterPage() {
             <br /> (최대 20글자)
           </p>
         )}
+        <div style={{ marginTop: 20, padding: 20, backgroundColor: "#fff" }}>
+          <Image
+            src={preview ?? defaultAvatar}
+            width={50}
+            roundedCircle
+            style={{ backgroundColor: "#fff" }}
+          />
+          <input
+            type="file"
+            name="image"
+            accept="image/jpeg, image/png"
+            ref={inputOpenImageRef}
+            onChange={handleUploadImage}
+            // style={{ display: "none" }}
+          />
+        </div>
         {/* 
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>프로필 사진</Form.Label>
           <Form.Control type="file" size="sm" />
         </Form.Group> */}
-        {formErrors && <p className="warningMessage">{formErrors}</p>}
+        <div style={{ height: 50, display: "flex", alignItems: "flex-end" }}>
+          {formErrors && <p className="warningMessage">{formErrors}</p>}
+        </div>
         <input
           type="submit"
           value="확인"
