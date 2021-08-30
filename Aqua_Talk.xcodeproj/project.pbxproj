@@ -19,6 +19,9 @@
 		35370806268A0397005543E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35370804268A0397005543E9 /* LaunchScreen.storyboard */; };
 		357D3A3A2699D9B900ED5A6D /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357D3A392699D9B900ED5A6D /* SingUpViewController.swift */; };
 		3583BB7826BABC5000E7C505 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3583BB7726BABC5000E7C505 /* FriendsViewController.swift */; };
+		358B915A26DD219C00873AE8 /* SearchFriendLIstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358B915926DD219C00873AE8 /* SearchFriendLIstTableViewCell.swift */; };
+		3593794B26D9234E0067D7D7 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593794A26D9234E0067D7D7 /* DetailViewController.swift */; };
+		3593794D26DA212E0067D7D7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593794C26DA212E0067D7D7 /* SearchViewController.swift */; };
 		35A0187F269AAE760005B28B /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0187E269AAE760005B28B /* UserInfoModel.swift */; };
 		35A5DB1A26BC115E0057AFAA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A5DB1926BC115E0057AFAA /* HomeViewController.swift */; };
 		35CAD24A26B51583001B3459 /* URLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CAD24926B51583001B3459 /* URLAPI.swift */; };
@@ -40,6 +43,9 @@
 		35370807268A0397005543E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		357D3A392699D9B900ED5A6D /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		3583BB7726BABC5000E7C505 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		358B915926DD219C00873AE8 /* SearchFriendLIstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendLIstTableViewCell.swift; sourceTree = "<group>"; };
+		3593794A26D9234E0067D7D7 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		3593794C26DA212E0067D7D7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		35A0187E269AAE760005B28B /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		35A5DB1926BC115E0057AFAA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		35CAD24926B51583001B3459 /* URLAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAPI.swift; sourceTree = "<group>"; };
@@ -67,6 +73,8 @@
 				353707FD268A0395005543E9 /* LoginViewController.swift */,
 				357D3A392699D9B900ED5A6D /* SingUpViewController.swift */,
 				35A5DB1926BC115E0057AFAA /* HomeViewController.swift */,
+				3593794A26D9234E0067D7D7 /* DetailViewController.swift */,
+				3593794C26DA212E0067D7D7 /* SearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -77,6 +85,7 @@
 				3529324E26BE395700253EE8 /* MyTableViewCell.swift */,
 				3529325026BF919300253EE8 /* FriendsTableViewCell.swift */,
 				3529325126BF919300253EE8 /* FriendsTableViewCell.xib */,
+				358B915926DD219C00873AE8 /* SearchFriendLIstTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -270,10 +279,13 @@
 				3583BB7826BABC5000E7C505 /* FriendsViewController.swift in Sources */,
 				3521D1FC26B2E98700DFC826 /* ViewModels.swift in Sources */,
 				353707FE268A0395005543E9 /* LoginViewController.swift in Sources */,
+				3593794B26D9234E0067D7D7 /* DetailViewController.swift in Sources */,
 				3529325226BF919300253EE8 /* FriendsTableViewCell.swift in Sources */,
 				35CAD24A26B51583001B3459 /* URLAPI.swift in Sources */,
 				353707FA268A0395005543E9 /* AppDelegate.swift in Sources */,
 				3529324F26BE395700253EE8 /* MyTableViewCell.swift in Sources */,
+				3593794D26DA212E0067D7D7 /* SearchViewController.swift in Sources */,
+				358B915A26DD219C00873AE8 /* SearchFriendLIstTableViewCell.swift in Sources */,
 				357D3A3A2699D9B900ED5A6D /* SingUpViewController.swift in Sources */,
 				353707FC268A0395005543E9 /* SceneDelegate.swift in Sources */,
 				35A5DB1A26BC115E0057AFAA /* HomeViewController.swift in Sources */,

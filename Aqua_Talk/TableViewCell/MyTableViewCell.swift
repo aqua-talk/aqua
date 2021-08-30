@@ -12,23 +12,16 @@ class MyTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusMessage: UILabel!
+    @IBOutlet weak var nameProfileCenterY: NSLayoutConstraint!
     
     func update(info: UserInfo) {
 //        profileImage.setImageUrl(info.profile!) ****************
         profileImage.image = UIImage(named: "luffy.jpg")//여기 지워야함 *****************
         profileImage.layer.cornerRadius = 20
         nameLabel.text = info.name
-        statusMessage.text = ""
+        statusMessage.text = info.statusMessage
         if statusMessage.text == ""{
-            nameLabel.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint(item: nameLabel, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
-//            NSLayoutConstraint(item: nameLabel,
-//                               attribute: .centerY,
-//                               relatedBy: .equal,
-//                               toItem: profileImage,
-//                               attribute: .centerY,
-//                               multiplier: 1.0,
-//                               constant: 0.0).isActive = true
+            nameProfileCenterY.constant = 0
         }
     }
 

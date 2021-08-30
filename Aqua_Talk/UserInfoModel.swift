@@ -58,7 +58,7 @@ struct FriendInfo: Equatable, Codable {
     init(){
         email = "friend@email.com"
         name = "김친구"
-        statusMessage = "friend status massage"
+        statusMessage = "상태 메시지"
         profile = "fiendimage"
     }
     

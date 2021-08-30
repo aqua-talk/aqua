@@ -1,33 +1,25 @@
 //
-//  FriendsTableViewCell.swift
+//  SearchFriendLIstTableViewCell.swift
 //  Aqua_Talk
 //
-//  Created by Jeongguk Kim on 2021/08/08.
+//  Created by Jeongguk Kim on 2021/08/30.
 //
 
 import UIKit
 
-class FriendsTableViewCell: UITableViewCell {
+class SearchFriendLIstTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var statusMessage: UILabel!
-    @IBOutlet weak var nameProfileCenterY: NSLayoutConstraint!
+    @IBOutlet weak var addButton: UIButton!
     
     func update(info: FriendInfo) {
-//        profileImage.setImageUrl(info.profile!)
-        profileImage.image = UIImage(named: "defaultImage.jpeg")
+        profileImage.setImageUrl(info.profile!)
         profileImage.layer.cornerRadius = 20
         nameLabel.text = info.name
-        statusMessage.text = info.statusMessage
-        
-        if statusMessage.text == ""{
-            nameProfileCenterY.constant = 0
-        }
     }
+    
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         // Initialization code
     }
@@ -36,6 +28,8 @@ class FriendsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func addFriend(_ sender: Any) {
     }
     
 }

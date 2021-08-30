@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 //여기부터 다시 다 수정할거임
 class URLSessionAPI {
+    let userViewModel = UserViewModel()
     
     static func createUser(_ email: String, _ name: String, _ password: String) {
         let parameter = [
@@ -161,12 +162,45 @@ class URLSessionAPI {
             return []
         }
     }
-
+//==========alamofire=========
+    
+    static func friendSearch(_ trem: String) -> [FriendInfo] {
+        var friendList: [FriendInfo] = []
+        let parameter = ["name": trem]
+        
+        Alamofire.request("url", method: .get, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
+            case .success(let jsonvalue):
+                do{
+                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+                    let value = parsing.parseFriends(data)
+                    friendList = value
+                    print(friendList)
+                }
+                catch let error{
+                    print("-->parsing error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("===========\(error.localizedDescription)")
+            }
+        }
+        return friendList
+    }
 }
 
-
-
-
+class parsing {
+    static func parseFriends(_ data: Data) -> [FriendInfo] {
+        let decoder = JSONDecoder()
+        
+        do {
+            let response = try decoder.decode(FriendInfoResponse.self, from: data)
+            let friends = response.friends
+            return friends
+        }catch let error {
+            print("-->parsing error: \(error.localizedDescription)")
+            return []
+        }
+    }
+}
 
 
 struct UserInfoResponse: Codable {
