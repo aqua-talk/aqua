@@ -1,21 +1,22 @@
 const Sequelize = require('sequelize');
 
 module.exports = ((sequelize,DataTypes)=>{
-    return sequelize.define('user',{
-        email:{
+    return sequelize.define('user_web',{
+     
+        id:{
             type: Sequelize.STRING(100),
             allowNull: false,
             primaryKey: true,
         },
-        userid:{
+        email:{
             type: Sequelize.STRING(100),
             allowNull: false,
         },
-        username:{
+        displayName:{
             type: Sequelize.STRING(100),
             allowNull: false, // 카카오 로그인은 비번 필요없으니,,
         },
-        gtoken :{ // 뭐로 로그인 했는지 : 카카오, 로컬,,
+        googleId :{ // 뭐로 로그인 했는지 : 카카오, 로컬,,
             type: Sequelize.STRING(1000),
             allowNull: false,
             

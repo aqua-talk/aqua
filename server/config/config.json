@@ -2,7 +2,7 @@
   "development": {
     "username": "xogur1212",
     "password": "6647784",
-    "database": "aqua_talk_develop",
+    "database": "aqua_talk_localhost",
     "host": "3.38.71.214",
     "dialect": "mysql",
     "operatorAliases":false

@@ -9,60 +9,8 @@ const {
     deleteOne
 } = require('./../model/user');
 
-/***********************************
- *           FB Login              *
- ***********************************/
+
 /*
- router.post('/login/facebook', function(req, res, next) {
-    var fbUserEmail = req.body.fbUserEmail;
-    var fbAccessToken = req.body.fbAccessToken;
-
-    var findConditionfbUserEmail = {
-        email: fbUserEmail
-    }
-    users.findOne(findConditionfbUserEmail)
-        .exec(function (err, user) {
-            if (err){
-               res.json({
-                   type: false,
-                   data: "Error occured " + err
-               });
-            }
-            else if (!user){
-                console.log('user not found');
-                fbSignup(fbUserEmail, fbAccessToken, function (err, savedUser) {
-                    console.log(1);
-                    if (err){
-                        res.json({
-                            type: false,
-                            data: "Error occured " + err
-                        });
-                    } else {
-                        res.json({
-                            type: true,
-                            data: savedUser,
-                            token: savedUser.jsonWebToken
-                        });
-                    }
-                });
-            }
-            else if (user) {
-                console.log('user');
-                console.log(user);
-                user.fbToken = fbAccessToken;
-                user.save(function (err, savedUser) {
-                    res.json({
-                        type: true,
-                        data: user,
-                        token: user.jsonWebToken
-                    }); 
-                });
-            }
-        });
-});
-
-*/
-
 function Signup(Email, Token, next) {
     var userModel = new user();
     userModel.email = Email;
@@ -74,13 +22,102 @@ function Signup(Email, Token, next) {
         });
     });
 }
+*/
 
-router.post('/login/info', async (req, res, next) => {
+
+router.post('/login/info',  (req, res, next) => {
 
     var email = req.body.email
     var userid = req.body.userid
     var username = req.body.username
     var gtoken = req.body.gtoken
+    var friend_list_array=new Array();
+    models.User
+    .findOrCreate({
+        where: {
+            email: req.body.email
+        },
+        defaults: {
+            userid: userid,
+            username: username,
+            gtoken: gtoken
+        }
+    })
+
+    .then((user_info) => {
+        models.Is_friend.findAll({
+            where:{
+                email:user_info[0].dataValues.email
+            }
+        })
+        .then((friend_list) =>{
+            for(i=0;i<friend_list.length;i++){
+            //console.log(friend_list[i].dataValues.friend)
+             friend_list_array[i]=friend_list[i].dataValues.friend;
+           
+            }
+            //가입할떄 default 사진으로 사용되게 img url로 사용할수 있께 같이전송
+            //해야되는거 select 이메일 반환하는 where문 name쓰게 
+            console.log(friend_list_array)
+            res.json({
+                user_info: {
+                    
+                    email: user_info[0].dataValues.email,
+                    userid: user_info[0].dataValues.userid,
+                    username: user_info[0].dataValues.username,
+                    gtoken: user_info[0].dataValues.gtoken
+                    
+    
+                },
+                friend_list:friend_list_array
+                    
+                
+            })
+        })   
+
+      
+    })
+})
+//친구추가
+router.post('/add_friend',  (req, res, next) => {
+
+    models.Is_friend
+    .findOrCreate({
+        where:{
+            email:req.body.email,
+            friend:req.body.friend
+        }
+    })
+    .then((is_success) =>{
+        res.send("성공")    
+    })
+    
+    res.send("성공") 
+    
+})
+
+
+//삭제 추가할예정 내용수정되야됨
+router.post('/delete_friend',  (req, res, next) => {
+
+    models.Is_friend
+    .findOrCreate({
+        where:{
+            email:req.body.email,
+            friend:req.body.friend
+        }
+    })
+    .then((is_success) =>{
+        res.send("성공")    
+    })
+    
+    res.send("성공") 
+    
+})
+
+
+
+
 
     //console.log("email",req.headers)
     // console.log("userId", req.body)
@@ -105,18 +142,11 @@ router.post('/login/info', async (req, res, next) => {
 */
 
 
-    models.user.findOrCreate({
-            where: {
-                email: req.body.email
-            },
-            defaults: {
-                userid: userid,
-                username: username,
-                gtoken: gtoken
-            }
-        })
+  
 
-        .then((user, created) => {
+            
+            /*
+            console.log()
             try {
                 //res.json({islogin:"true"})
                 const token = jwt.sign({
@@ -146,8 +176,7 @@ router.post('/login/info', async (req, res, next) => {
                                 eamil: savedUser.email,
                                 userid: savedUser.userid,
                                 username: savedUser.username,
-                                
-                                token: token
+                                token: save.gtoken
                             });
                         }
                     });
@@ -175,14 +204,14 @@ router.post('/login/info', async (req, res, next) => {
                     message: error
                 });
             }
-
-        })
+*/
+        
 
 
 
     // res.json({islogin:"true"}) 
 
-})
+
 router.post('/login/info2', function (req, res, next) {
 
     res.json({

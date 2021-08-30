@@ -36,5 +36,8 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.User=require('./user')(sequelize,Sequelize);
+db.User_web=require('./user_web')(sequelize,Sequelize);
+db.Is_friend=require('./is_friend')(sequelize,Sequelize);
+db.Is_friend_web=require('./is_friend_web')(sequelize,Sequelize);
 
 module.exports = db;
