@@ -493,6 +493,9 @@
                                     <constraint firstAttribute="height" constant="50" id="7Ee-fe-hdg"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="wxZ-6K-DR8" id="buI-hj-66M"/>
+                                </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idA-wj-ALp">
                                 <rect key="frame" x="349" y="44" width="65" height="50"/>

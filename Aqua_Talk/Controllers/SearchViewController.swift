@@ -51,16 +51,13 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("???")
+        friendList = []
+
+        
+        dismissKeyboard()
+
+        guard let searchTrem = searchBar.text, searchTrem.isEmpty == false else { return }
+        print("=======>\(searchTrem)")
+        friendList = URLSessionAPI.friendSearch(searchTrem)
     }
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        friendList = []
-//
-//        print("???")
-//        dismissKeyboard()
-//
-//        guard let searchTrem = searchBar.text, searchTrem.isEmpty == false else { return }
-//        print("=======>\(searchTrem)")
-//        friendList = URLSessionAPI.friendSearch(searchTrem)
-//    }
 }
