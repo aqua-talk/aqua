@@ -8,34 +8,23 @@
 import UIKit
 
 class UserViewModel {
-//    enum Section: Int, CaseIterable {
-//        case my
-//        case friendList
-//
-//        var title: String {
-//            switch self {
-//            case .my: return ""
-//            default: return "친구"
-//            }
-//        }
-//    }
     private let manager = AquaManager.shared
     
     var userInfo: UserInfo { //내정보
         return manager.user!
     }
     var friends: [FriendInfo] { //친구배열
-        return (manager.user?.firends)!
+        return (manager.user?.friends)!
     }
     var friendsCount: Int { // 친구수
-        return manager.user?.firends?.count ?? 0
+        return manager.user?.friends?.count ?? 0
     }
 //
 //    func addFriend(_ friend: FriendInfo) { //친구 추가
 //        manager.addFriend(friend)
 //    }
     func friendInfo(at index: Int) -> FriendInfo{ //친구정보
-        return (manager.user?.firends![index])!
+        return (manager.user?.friends![index])!
     }
 //    func deleteFriend(_ friend: FriendInfo) { //친구제거
 //        manager.deleteFriend(friend)
@@ -50,13 +39,5 @@ class UserViewModel {
     func loadTasks(_ email:String, _ password: String) { //로그인시 정보 받아오기
 //        manager.loadUser(email, password)
     }
-    
-}
-
-class TalkViewModel {
-    
-}
-
-class MypageViewModel {
     
 }

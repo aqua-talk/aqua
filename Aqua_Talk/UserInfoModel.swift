@@ -7,48 +7,84 @@
 
 import UIKit
 
-struct UserInfo: Codable {
-    let email: String
-    var name: String
-    var password: String
-    var statusMessage: String?
-    var profile: String?
-    var firends: [FriendInfo]?
-    let token: String
-    
+//struct UserInfo: Codable {
+//    let email: String
+//    var name: String
+////    var password: String
+//    var statusMessage: String?
+//    var profile: String?
+//    var firends: [FriendInfo]?
+//    let token: String
+//    
+//    
+//    init(){
+//        email="test@emai.com"
+//        name = "김정국"
+////        password = "testPassword"
+//        statusMessage = "test~~~~~"
+//        profile = "image"
+//        token = "token"
+//        firends = [
+//            FriendInfo(),
+//            FriendInfo(),
+//            FriendInfo()
+//        ]
+//    }
+//    mutating func update(name: String,/* password: String,*/ statusMessage: String, profile: String, friends: [FriendInfo]){
+//        self.name = name
+////        self.password = password
+//        self.statusMessage = statusMessage
+//        self.profile = profile
+//        self.firends = friends
+//    }
+//    
+//    enum CodingKeys: String, CodingKey{
+//        case email
+//        case name
+////        case password
+//        case statusMessage
+//        case profile
+//        case firends
+//        case token
+//    }
+//}
+struct LoginResponse: Codable{
+    let user: UserInfo
     
     init(){
-        email="test@emai.com"
-        name = "김정국"
-        password = "testPassword"
-        statusMessage = "test~~~~~"
-        profile = "image"
-        token = "token"
-        firends = [
-            FriendInfo(),
-            FriendInfo(),
-            FriendInfo()
-        ]
+        user = UserInfo()
     }
-    mutating func update(name: String, password: String, statusMessage: String, profile: String, friends: [FriendInfo]){
-        self.name = name
-        self.password = password
-        self.statusMessage = statusMessage
-        self.profile = profile
-        self.firends = friends
-    }
-    
     enum CodingKeys: String, CodingKey{
-        case email
-        case name
-        case password
-        case statusMessage
-        case profile
-        case firends
-        case token
+        case user = "user_info"
     }
 }
-
+struct UserInfo: Codable {
+    let email: String
+//    let userid: String
+    let name: String
+    let statusMessage: String
+    let profile: String
+    let token: String
+    let friends: [FriendInfo]?
+    init(){
+        email = ""
+//        userid = ""
+        name = ""
+        statusMessage = ""
+        profile = ""
+        token = ""
+        friends = []
+    }
+    enum CodingKeys: String, CodingKey {
+        case email
+//        case userid
+        case name = "username"
+        case statusMessage
+        case profile
+        case token = "gtoken"
+        case friends = "friend_list"
+    }
+}
 struct FriendInfo: Equatable, Codable {
     let email: String
     var name: String

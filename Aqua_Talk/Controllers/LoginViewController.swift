@@ -148,74 +148,56 @@ extension LoginViewController: GIDSignInDelegate {
             "username": user!.profile.name!,
             "gtoken": user!.authentication.accessToken!
         ]
-
-        
         //======================
-        self.userViewModel.googleUserLoadTask(userInfo: UserInfo())// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
-        print("friendCount===>\(userViewModel.friendsCount)")
-        guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
-            return
-        }
+//        self.userViewModel.googleUserLoadTask(userInfo: UserInfo())// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
+//        print("friendCount===>\(userViewModel.friendsCount)")
+//        guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+//            return
+//        }
         
-        self.navigationController?.pushViewController(homeVC, animated: true)
+//        self.navigationController?.pushViewController(homeVC, animated: true)
         //======================
-//        Alamofire.request("http://3.38.107.175:3000/api/login/info", method: .post, parameters: loginParameter)
-//                            .validate(statusCode: 200..<300)
-//                    .responseJSON { (response) in switch response.result {
-//                    case .success(let jsonvalue):
-//                        do{
-//                            let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
-//                            let value = LoginViewController.parseGUserInfo(data)
-//        //                    print(value)
-//                            self.userViewModel.googleUserLoadTask(userInfo: UserInfo())// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
-//                            //====================== 화면 전환
-//                            guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
-//                                return
-//                            }
-//        
-//                            self.navigationController?.pushViewController(homeVC, animated: true)
-//                            //======================
-//                        }
-//                        catch let error{
-//                            print("-->parsing error: \(error.localizedDescription)")
-//                        }
-//                    case .failure(let error):
-//                        print("===========\(error.localizedDescription)")
-//                    }
-//                }
+//        print(loginParameter)
+        Alamofire.request("http://3.35.70.131:3002/api/login/info", method: .post, parameters: loginParameter)
+                            .validate(statusCode: 200..<300)
+                    .responseJSON { (response) in switch response.result {
+                    case .success(let jsonvalue):
+                        do{
+                            let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+                            let value = LoginViewController.parseGUserInfo(data)
+//                            print(value)
+                            self.userViewModel.googleUserLoadTask(userInfo: value.user)// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
+                            //====================== 화면 전환
+                            guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+                                return
+                            }
+        
+                            self.navigationController?.pushViewController(homeVC, animated: true)
+                            //======================
+                        }
+                        catch let error{
+                            print("-->parsing error: \(error.localizedDescription)")
+                        }
+                    case .failure(let error):
+                        print("===========\(error.localizedDescription)")
+                    }
+                }
         return
     }
     
-    static func parseGUserInfo(_ data: Data) -> testResonse {
+    static func parseGUserInfo(_ data: Data) -> LoginResponse {
         let decoder = JSONDecoder()
         do {
-            let response = try decoder.decode(testResonse.self, from: data)
+            let response = try decoder.decode(LoginResponse.self, from: data)
             let user = response
             print("******\(user)")
             return user
         }catch let error {
             print("-->parsing error: \(error.localizedDescription)")
-            return testResonse();
+            return LoginResponse();
         }
     }
 }
 
-struct testResonse: Codable {
-    let email: String
-    let userid: String
-    let username: String
-    let token: String
-    init(){
-        email = ""
-        userid = ""
-        username = ""
-        token = ""
-    }
-    enum CodingKeys: String, CodingKey {
-        case email
-        case userid
-        case username
-        case token
-    }
-}
+
 

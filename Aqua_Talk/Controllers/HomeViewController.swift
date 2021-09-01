@@ -33,7 +33,6 @@ class HomeViewController: UIViewController {
     @IBAction func searchButton(_ sender: Any) {
         let VC = self.storyboard?.instantiateViewController(identifier: "SearchViewController")
         VC?.modalTransitionStyle = .coverVertical
-//        self.present(VC!, animated: true, completion: nil)
         self.navigationController?.pushViewController(VC!, animated: false)
     }
     
@@ -44,13 +43,6 @@ extension HomeViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if section == 1 {
-//            return "친구 \(userViewModel.friendsCount)"
-//        }
-//        return ""
-//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
