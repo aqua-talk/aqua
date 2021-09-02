@@ -11,6 +11,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusMessage: UILabel!
+    @IBOutlet weak var talkAndProfile: UIButton!
     
     let userViewModel = UserViewModel()
     var section: Int?
@@ -18,20 +19,20 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         profileImage.layer.cornerRadius = 40
         updateUI()
     }
     
     func updateUI(){
         if section == 0{
-            
-            profileImage.setImageUrl(userViewModel.userInfo.profile) //****************
-//            profileImage.image = UIImage(named: "luffy.jpg")//여기 지워야함 *****************
+            talkAndProfile.setTitle("프로필 편집", for: .normal)
+            talkAndProfile.setImage(UIImage(systemName: "pencil"), for: .normal)
+            profileImage.setImageUrl(userViewModel.userInfo.profile)
             nameLabel.text = userViewModel.userInfo.name
             statusMessage.text = userViewModel.userInfo.statusMessage
         }else {
             profileImage.setImageUrl(userViewModel.userInfo.friends![row!].profile!)
-//            profileImage.image = UIImage(named: "defaultImage.jpeg")//여기 지워야함 *****************
             nameLabel.text = userViewModel.userInfo.friends?[row!].name
             statusMessage.text = userViewModel.userInfo.friends![row!].statusMessage
         }
@@ -41,5 +42,10 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func talkButton(_ sender: Any) {
+        if section == 0 {
+            
+        }else {
+            
+        }
     }
 }

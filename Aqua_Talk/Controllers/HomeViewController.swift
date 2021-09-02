@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
                 return
             }
             let indexPath = sender as? IndexPath
+            vc.modalPresentationStyle = .fullScreen
             vc.section = indexPath?.section
             vc.row = indexPath?.row
         }
