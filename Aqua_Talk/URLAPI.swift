@@ -164,17 +164,16 @@ class URLSessionAPI {
 //    }
 //==========alamofire=========
     
-    static func friendSearch(_ trem: String) -> [FriendInfo] {
-        var friendList: [FriendInfo] = []
-        let parameter = ["name": trem]
+    static func friendSearch(_ trem: String, completion: @escaping ([FriendInfo]) -> Void) {
+        let parameter = ["friend_name": trem]
         
-        Alamofire.request("url", method: .get, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
+        Alamofire.request("http://3.35.70.131:3002/api/search/friend", method: .get, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
             case .success(let jsonvalue):
                 do{
                     let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+                    print(data)
                     let value = parsing.parseFriends(data)
-                    friendList = value
-                    print(friendList)
+                    completion(value)
                 }
                 catch let error{
                     print("-->parsing error: \(error.localizedDescription)")
@@ -183,7 +182,6 @@ class URLSessionAPI {
                 print("===========\(error.localizedDescription)")
             }
         }
-        return friendList
     }
 }
 
@@ -198,30 +196,13 @@ class parsing {
         }catch let error {
             print("-->parsing error: \(error.localizedDescription)")
             return []
+            
         }
     }
 }
 
 
-//struct UserInfoResponse: Codable {
-//    let resultCount: Int
-//    let user: [UserInfo]
-//
-//    enum CodingKeys: String, CodingKey {
-//        case resultCount
-//        case user
-//    }
-//}
-struct FriendInfoResponse: Codable {
-//    let resultCount: Int
-    let friends: [FriendInfo]
-
-    enum CodingKeys: String, CodingKey {
-//        case resultCount
-        case friends
-    }
-}
-
+////????
 struct Response: Codable {
     let resultCount: Int
     let emails: [Email]

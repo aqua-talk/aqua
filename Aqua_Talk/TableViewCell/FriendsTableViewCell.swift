@@ -16,7 +16,7 @@ class FriendsTableViewCell: UITableViewCell {
     @IBOutlet weak var nameProfileCenterY: NSLayoutConstraint!
     
     func update(info: FriendInfo) {
-        profileImage.setImageUrl(info.profile!)
+        profileImage.setImageUrl(info.profile)
 //        profileImage.image = UIImage(named: "defaultImage.jpeg")
         profileImage.layer.cornerRadius = 20
         nameLabel.text = info.name

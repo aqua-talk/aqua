@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchFriendLIstTableViewCell: UITableViewCell {
+class SearchListViewCell: UITableViewCell {
     let userViewModel = UserViewModel()
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -15,7 +15,7 @@ class SearchFriendLIstTableViewCell: UITableViewCell {
     var friendId: String?
     
     func update(info: FriendInfo) {
-        profileImage.setImageUrl(info.profile!)
+        profileImage.setImageUrl(info.profile)
         profileImage.layer.cornerRadius = 20
         nameLabel.text = info.name
         //friendId = info.email
@@ -41,6 +41,7 @@ class SearchFriendLIstTableViewCell: UITableViewCell {
     }
     @IBAction func addFriend(_ sender: Any) {
         //여기서 friendId 가지고 서버에 넘겨준후 응답오면 버튼 비활성화시키고 친구배열에 추가시켜야함
+        print("add")
     }
     
 }

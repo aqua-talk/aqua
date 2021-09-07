@@ -19,7 +19,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         profileImage.layer.cornerRadius = 40
         updateUI()
     }
@@ -32,7 +31,7 @@ class DetailViewController: UIViewController {
             nameLabel.text = userViewModel.userInfo.name
             statusMessage.text = userViewModel.userInfo.statusMessage
         }else {
-            profileImage.setImageUrl(userViewModel.userInfo.friends![row!].profile!)
+            profileImage.setImageUrl(userViewModel.userInfo.friends![row!].profile)
             nameLabel.text = userViewModel.userInfo.friends?[row!].name
             statusMessage.text = userViewModel.userInfo.friends![row!].statusMessage
         }
@@ -41,9 +40,17 @@ class DetailViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func talkButton(_ sender: Any) {
+    @IBAction func talkAndupdateButton(_ sender: Any) {
         if section == 0 {
+            guard let updateVC = self.storyboard?.instantiateViewController(withIdentifier: "updateViewController") as? ProfileUpdateViewController  else {
+                return
+            }
+            updateVC.modalPresentationStyle = .fullScreen
+            updateVC.image = profileImage.image!
+            updateVC.name = nameLabel.text
+            updateVC.message = statusMessage.text
             
+            self.present(updateVC, animated: false, completion: nil)
         }else {
             
         }

@@ -10,11 +10,11 @@ import UIKit
 class SearchViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
     var friendList: [FriendInfo] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
@@ -34,11 +34,10 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "friendListCell", for: indexPath) as? SearchFriendLIstTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "friendListCell", for: indexPath) as? SearchListViewCell else {
             return UITableViewCell()
         }
         cell.update(info: friendList[indexPath.row])
-//        tableView.rowHeight = 80
         return cell
     }
     
@@ -52,12 +51,15 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         friendList = []
-
-        
         dismissKeyboard()
-
         guard let searchTrem = searchBar.text, searchTrem.isEmpty == false else { return }
-        print("=======>\(searchTrem)")
-        friendList = URLSessionAPI.friendSearch(searchTrem)
+        URLSessionAPI.friendSearch(searchTrem) { friends in
+            DispatchQueue.main.async {
+                self.friendList = friends
+                //여기서 검색된 리스트중에 자신과 내친구들 이메일 겹치면 배열에서 지워줘야함
+                self.tableView.reloadData()
+            }
+        }
+
     }
 }

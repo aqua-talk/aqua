@@ -85,11 +85,20 @@ struct UserInfo: Codable {
         case friends = "friend_list"
     }
 }
+
+struct FriendInfoResponse: Codable {
+    let friends: [FriendInfo]
+    
+    enum CodingKeys: String, CodingKey {
+        case friends = "friend_list_info"
+    }
+}
+
 struct FriendInfo: Equatable, Codable {
     let email: String
     var name: String
-    var statusMessage: String?
-    var profile: String?
+    var statusMessage: String
+    var profile: String
     
     init(){
         email = "friend@email.com"
@@ -106,8 +115,8 @@ struct FriendInfo: Equatable, Codable {
     
     enum CodingKeys: String, CodingKey {
         case email
-        case name
-        case statusMessage
+        case name = "username"
+        case statusMessage = "status_message"
         case profile
     }
     

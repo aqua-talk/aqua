@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
             }
             let indexPath = sender as? IndexPath
             vc.modalPresentationStyle = .fullScreen
+//            vc.modalTransitionStyle = .coverVertical
             vc.section = indexPath?.section
             vc.row = indexPath?.row
         }
@@ -32,9 +33,11 @@ class HomeViewController: UIViewController {
         
     }
     @IBAction func searchButton(_ sender: Any) {
-        let VC = self.storyboard?.instantiateViewController(identifier: "SearchViewController")
-        VC?.modalTransitionStyle = .coverVertical
-        self.navigationController?.pushViewController(VC!, animated: false)
+        guard let VC = self.storyboard?.instantiateViewController(identifier: "SearchViewController") else {
+            return
+        }
+        self.navigationController?.pushViewController(VC, animated: false)
+        
     }
     
 }

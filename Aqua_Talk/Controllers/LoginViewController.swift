@@ -38,10 +38,6 @@ class LoginViewController: UIViewController {
         singupLabel.isUserInteractionEnabled = true
         singupLabel.addGestureRecognizer(tab)
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-
 
     
     @IBAction func googleSignIn(_ sender: Any) {
