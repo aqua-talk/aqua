@@ -65,7 +65,7 @@ struct UserInfo: Codable {
     let statusMessage: String
     let profile: String
     let token: String
-    let friends: [FriendInfo]?
+    var friends: [FriendInfo]?
     init(){
         email = ""
 //        userid = ""
@@ -86,14 +86,20 @@ struct UserInfo: Codable {
     }
 }
 
-struct FriendInfoResponse: Codable {
+struct FriendInfoListResponse: Codable {
     let friends: [FriendInfo]
     
     enum CodingKeys: String, CodingKey {
         case friends = "friend_list_info"
     }
 }
-
+struct FriendInfoResponse: Codable {
+    let friend: FriendInfo
+    
+    enum CodingKeys: String, CodingKey {
+        case friend = "friend_list_info"
+    }
+}
 struct FriendInfo: Equatable, Codable {
     let email: String
     var name: String
@@ -101,10 +107,10 @@ struct FriendInfo: Equatable, Codable {
     var profile: String
     
     init(){
-        email = "friend@email.com"
-        name = "김친구"
-        statusMessage = "상태 메시지"
-        profile = "fiendimage"
+        email = ""
+        name = ""
+        statusMessage = ""
+        profile = ""
     }
     
     mutating func update(name: String, statusMessage: String, profile: String){
@@ -150,10 +156,10 @@ class AquaManager {
 //    func updateUser(_ userInfo: UserInfo){
 //
 //    }
-//    func addFriend(_ friend: FriendInfo) {
-//        friends.append(friend)
+    func addFriend(_ friend: FriendInfo) {
+        user?.friends?.append(friend)
 //        saveFriend()
-//    }
+    }
 //    func deleteFriend(_ friend: FriendInfo) {
 //        friends = friends.filter { $0.email != friend.email }
 //        saveFriend()

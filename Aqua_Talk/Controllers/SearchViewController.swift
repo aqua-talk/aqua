@@ -12,6 +12,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    let userViewModel = UserViewModel()
     var friendList: [FriendInfo] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +56,8 @@ extension SearchViewController: UISearchBarDelegate {
         guard let searchTrem = searchBar.text, searchTrem.isEmpty == false else { return }
         URLSessionAPI.friendSearch(searchTrem) { friends in
             DispatchQueue.main.async {
-                self.friendList = friends
-                //여기서 검색된 리스트중에 자신과 내친구들 이메일 겹치면 배열에서 지워줘야함
+                self.friendList = friends.filter{$0.email != self.userViewModel.userInfo.email}
+                self.friendList = self.friendList.filter{!self.userViewModel.friends.contains($0)}
                 self.tableView.reloadData()
             }
         }

@@ -20,9 +20,9 @@ class UserViewModel {
         return manager.user?.friends?.count ?? 0
     }
 //
-//    func addFriend(_ friend: FriendInfo) { //친구 추가
-//        manager.addFriend(friend)
-//    }
+    func addFriend(_ friend: FriendInfo) { //친구 추가
+        manager.addFriend(friend)
+    }
     func friendInfo(at index: Int) -> FriendInfo{ //친구정보
         return (manager.user?.friends![index])!
     }

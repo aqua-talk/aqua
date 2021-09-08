@@ -183,6 +183,26 @@ class URLSessionAPI {
             }
         }
     }
+    
+    static func addFriend(_ trem: String, completion: @escaping (FriendInfo) -> Void) {
+        let parameter = ["email": trem]
+        
+        Alamofire.request("url", method: .post, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
+            case .success(let jsonvalue):
+                do{
+                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+                    print(data)
+                    let value = parsing.parseFriend(data)
+                    completion(value)
+                }
+                catch let error{
+                    print("-->parsing error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("===========\(error.localizedDescription)")
+            }
+        }
+    }
 }
 
 class parsing {
@@ -190,12 +210,25 @@ class parsing {
         let decoder = JSONDecoder()
         
         do {
-            let response = try decoder.decode(FriendInfoResponse.self, from: data)
+            let response = try decoder.decode(FriendInfoListResponse.self, from: data)
             let friends = response.friends
             return friends
         }catch let error {
             print("-->parsing error: \(error.localizedDescription)")
             return []
+            
+        }
+    }
+    static func parseFriend(_ data: Data) -> FriendInfo {
+        let decoder = JSONDecoder()
+        
+        do {
+            let response = try decoder.decode(FriendInfoResponse.self, from: data)
+            let friend = response.friend
+            return friend
+        }catch let error {
+            print("-->parsing error: \(error.localizedDescription)")
+            return FriendInfo()
             
         }
     }

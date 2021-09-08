@@ -18,7 +18,7 @@ class SearchListViewCell: UITableViewCell {
         profileImage.setImageUrl(info.profile)
         profileImage.layer.cornerRadius = 20
         nameLabel.text = info.name
-        //friendId = info.email
+        friendId = info.email
         if userViewModel.userInfo.email == info.email {
             addButton.isEnabled = false
             return
@@ -41,6 +41,14 @@ class SearchListViewCell: UITableViewCell {
     }
     @IBAction func addFriend(_ sender: Any) {
         //여기서 friendId 가지고 서버에 넘겨준후 응답오면 버튼 비활성화시키고 친구배열에 추가시켜야함
+        URLSessionAPI.addFriend(friendId!) { friend in
+            DispatchQueue.main.async {
+                if friend.email != "" {
+                    self.userViewModel.addFriend(friend)
+                    self.addButton.isEnabled = false
+                }
+            }
+        }
         print("add")
     }
     
