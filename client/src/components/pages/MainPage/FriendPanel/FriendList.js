@@ -8,9 +8,24 @@ import testFriendImage3 from "../../../../assets/images/CGS.png"; // 임시
 
 function FriendList() {
   const [friendList, setFriendList] = useState([
-    { name: "엄태혁", statusMessage: "test", profileImage: testFriendImage1 },
-    { name: "김정국", statusMessage: "test", profileImage: testFriendImage2 },
-    { name: "차광성", statusMessage: "test", profileImage: testFriendImage3 },
+    {
+      name: "엄태혁",
+      email: "test1@test.test",
+      statusMessage: "test",
+      profileImage: testFriendImage1,
+    },
+    {
+      name: "김정국",
+      email: "test2@test.test",
+      statusMessage: "test",
+      profileImage: testFriendImage2,
+    },
+    {
+      name: "차광성",
+      email: "test3@test.test",
+      statusMessage: "test",
+      profileImage: testFriendImage3,
+    },
   ]);
 
   const renderFriends = () => {

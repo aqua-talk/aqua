@@ -87,6 +87,9 @@ function LoginPage(props) {
       <Button as={Link} to={"/register"}>
         임시 회원가입 페이지
       </Button>
+      <Button as={Link} to={"/main"}>
+        임시 메인 페이지
+      </Button>
     </div>
   );
 }
