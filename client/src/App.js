@@ -8,6 +8,7 @@ import { setUser, clearUser } from "./redux/actions/user_action";
 import MainPage from "./components/pages/MainPage";
 import LoginPage from "./components/pages/LoginPage";
 import RegisterPage from "./components/pages/RegisterPage";
+import ChatPage from "./components/pages/ChatPage";
 import Loading from "./components/pages/Loading";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -88,6 +89,13 @@ function App() {
         </Route>
         <Route path={`${root}/register`}>
           <RegisterPage />
+        </Route>
+        <Route path={`${root}/chat/:friendEmail`}>
+          <ChatPage />
+        </Route>
+        <Route path={`${root}/main`}>
+          {/* 임시 메인 페이지 라우터*/}
+          <MainPage />
         </Route>
       </Switch>
     </div>
