@@ -13,12 +13,12 @@ function Chat(props) {
   };
   return (
     <div
-      style={{ padding: "10px 0" }}
+      style={{ padding: "10px 0" }} //호버시 배경 회색 추가 필요
       onDoubleClick={() => {
         handleOpenChat();
       }}
     >
-      <div style={{ display: "flex", justifyContent: "left" }}>
+      <div style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
         <Image
           src={props.chat.profileImage}
           width={50}
@@ -31,17 +31,14 @@ function Chat(props) {
         />
         <div
           style={{
+            width: "calc(100% - 130px)",
             marginLeft: 10,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
           }}
         >
-          <h4 style={{ margin: 0, fontSize: "1rem", fontWeight: 600 }}>{props.chat.name}</h4>
+          <h4 style={{ fontSize: "1rem", fontWeight: 600 }}>{props.chat.name}</h4>
           {props.chat.statusMessage && (
             <p
               style={{
-                margin: 0,
                 overflowX: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
@@ -50,6 +47,17 @@ function Chat(props) {
               {props.chat.statusMessage}
             </p>
           )}
+        </div>
+        <div
+          style={{
+            width: 70,
+            marginBottom: 16,
+            textAlign: "right",
+            fontSize: 12,
+            color: "#ccc",
+          }}
+        >
+          <span>오전 12:00</span> {/* 임시 */}
         </div>
       </div>
       {showProfile && <div style={{ backgroundColor: "#ececec" }}>Profile</div> /* modal? */}

@@ -10,14 +10,12 @@ function MyProfile() {
 
   return (
     <div style={{ padding: "10px 0" }}>
-      <div style={{ display: "flex", justifyContent: "left" }}>
+      <div style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
         <Image src={testProfileImage} width={60} roundedCircle style={{ cursor: "pointer" }} />
         <div
           style={{
             marginLeft: 10,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            width: "calc(100% - 60px)",
           }}
         >
           <h4 style={{ margin: 0, fontSize: "1rem", fontWeight: 600 }}>

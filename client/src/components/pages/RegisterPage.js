@@ -83,6 +83,7 @@ function RegisterPage() {
         프로필 정보
       </h1>
       <form
+        className="registerForm"
         onSubmit={handleSubmit(onSubmit)}
         style={{ width: 240, display: "flex", flexDirection: "column", color: "#fff" }}
       >

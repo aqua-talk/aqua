@@ -13,12 +13,12 @@ function Friend(props) {
   };
   return (
     <div
-      style={{ padding: "10px 0" }}
+      style={{ padding: "10px 0" }} //호버시 배경 회색 추가 필요
       onDoubleClick={() => {
         handleOpenChat();
       }}
     >
-      <div style={{ display: "flex", justifyContent: "left" }}>
+      <div style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
         <Image
           src={props.friend.profileImage}
           width={50}
@@ -31,17 +31,14 @@ function Friend(props) {
         />
         <div
           style={{
+            width: "calc(100% - 60px)",
             marginLeft: 10,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
           }}
         >
-          <h4 style={{ margin: 0, fontSize: "1rem", fontWeight: 600 }}>{props.friend.name}</h4>
+          <h4 style={{ fontSize: "1rem", fontWeight: 600 }}>{props.friend.name}</h4>
           {props.friend.statusMessage && (
             <p
               style={{
-                margin: 0,
                 overflowX: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",

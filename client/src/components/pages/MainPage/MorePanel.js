@@ -5,9 +5,8 @@ function MorePanel() {
   return (
     <div
       style={{
-        marginLeft: 60,
         width: "100%",
-        padding: "0 20px",
+        padding: "0 20px 0 80px",
         boxSizing: "border-box",
       }}
     >
