@@ -5,18 +5,52 @@ import MyProfile from "./FriendPanel/MyProfile";
 import FriendList from "./FriendPanel/FriendList";
 import Partition from "../../common/Partition";
 
+import testFriendImage1 from "../../../assets/images/UTH.png"; // 임시
+import testFriendImage2 from "../../../assets/images/KJG.png"; // 임시
+import testFriendImage3 from "../../../assets/images/CGS.png"; // 임시
+
 function FriendPanel() {
   const [isSearching, setIsSearching] = useState(false);
+  const [friendData, setFriendData] = useState([
+    {
+      name: "엄태혁",
+      email: "test1@test.test",
+      statusMessage: "test",
+      profileImage: testFriendImage1,
+    },
+    {
+      name: "김정국",
+      email: "test2@test.test",
+      statusMessage: "test",
+      profileImage: testFriendImage2,
+    },
+    {
+      name: "차광성",
+      email: "test3@test.test",
+      statusMessage: "test",
+      profileImage: testFriendImage3,
+    },
+    {
+      name: "차광선",
+      email: "test3@test.test",
+      statusMessage: "test",
+      profileImage: testFriendImage3,
+    },
+  ]);
+  const [searchedFriendData, setSearchedFriendData] = useState([]);
+
   const renderSearched = (input) => {
     setIsSearching(true);
 
     if (input) {
+      let friendDataArray = [...friendData];
       console.log(input);
-      /*
-      var stringVal = "Hello World",
-      exp = /java/;
-      stringVal1.search(exp);
-      */
+      setSearchedFriendData(
+        friendDataArray.filter((friend) => {
+          let regex = new RegExp(input);
+          return friend.name.search(regex) != -1;
+        })
+      );
     } else {
       setIsSearching(false);
     }
@@ -31,13 +65,13 @@ function FriendPanel() {
     >
       <FriendHeader renderSearched={renderSearched} />
       {isSearching ? (
-        <FriendList />
+        <FriendList friendData={searchedFriendData} />
       ) : (
         <>
           <MyProfile />
           <Partition />
           {/* added friend? */}
-          <FriendList />
+          <FriendList friendData={friendData} />
         </>
       )}
     </div>

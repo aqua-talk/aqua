@@ -12,22 +12,138 @@ function FriendHeader(props) {
       setHeaderMenu(menu);
     }
   };
-  const handleOnChange = (e) => {
-    let input = e.target.value.trim();
+
+  const renderHeaderMenu = (headerMenu) => {
     switch (headerMenu) {
       case "친구 찾기":
-        props.renderSearched(input);
+        return (
+          <form
+            style={{
+              padding: "10px 0",
+              display: "flex",
+              justifyContent: "right",
+              alignItems: "center",
+              gap: 10,
+            }}
+          >
+            <input
+              type="text"
+              onChange={(e) => {
+                handleSearchFriend(e);
+              }}
+              placeholder="이름으로 친구 검색"
+              style={{
+                width: "50%",
+                height: 32,
+                borderRadius: 20,
+                border: "2px solid skyblue",
+                padding: "5px 10px",
+                fontSize: 12,
+              }}
+            ></input>
+          </form>
+        );
         break;
+
       case "친구 추가":
-        //handleAddFriend();
+        return (
+          <>
+            <form
+              style={{
+                padding: "10px 0",
+                display: "flex",
+                justifyContent: "right",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <input
+                type="text"
+                onChange={(e) => {
+                  handlePostAddFriend(e);
+                }}
+                placeholder="Email로 친구 추가"
+                style={{
+                  width: "50%",
+                  height: 32,
+                  borderRadius: 20,
+                  border: "2px solid skyblue",
+                  padding: "5px 10px",
+                  fontSize: 12,
+                }}
+              ></input>
+              <input
+                type="submit"
+                onClick={(e) => {
+                  handleAddFriend(e);
+                }}
+                value="추가"
+                style={{
+                  height: 32,
+                  borderRadius: 20,
+                  border: "none",
+                  backgroundColor: "skyblue",
+                  padding: "5px 10px",
+                  fontSize: 12,
+                  color: "#fff",
+                }}
+              ></input>
+            </form>
+            {searchedFriendFromServer}
+          </>
+        );
         break;
       default:
-        console.log("error");
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+  const handleSearchFriend = (e) => {
+    let input = e.target.value.trim();
+    props.renderSearched(input);
   };
+
+  const searchedFriendFromServer = null;
+  const handlePostAddFriend = (e) => {
+    console.log(e.target.value);
+    axios
+      .get("/search_friend")
+      .then((response) => {
+        console.log(response);
+        // 여기에 친구추가 전처리(검색) 작성
+        searchedFriendFromServer = (
+          <div
+            style={{
+              paddingBottom: "10px",
+              display: "flex",
+              justifyContent: "right",
+              alignItems: "center",
+              gap: 10,
+            }}
+          >
+            {/* 여기에 검색된 친구 출력 */}
+          </div>
+        );
+      })
+      .catch(function (error) {
+        alert(`친구 정보 요청 실패
+    ${error}`);
+      });
+  };
+
+  const handleAddFriend = (e) => {
+    e.preventDefault();
+    axios
+      .get("/add_friend")
+      .then((response) => {
+        console.log(response);
+        // 여기에 친구추가 작성
+      })
+      .catch(function (error) {
+        alert(`친구 추가 실패
+    ${error}`);
+      });
+  };
+
   return (
     <div>
       <div
@@ -60,35 +176,7 @@ function FriendHeader(props) {
           </li>
         </ul>
       </div>
-      {headerMenu && (
-        <form
-          style={{
-            padding: "10px 0",
-            display: "flex",
-            justifyContent: "right",
-            alignItems: "center",
-          }}
-        >
-          <label style={{ marginRight: 10 }}>{headerMenu}</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              handleOnChange(e);
-            }}
-            style={{
-              width: "50%",
-            }}
-          ></input>
-          {headerMenu == "친구 추가" && (
-            <input
-              type="submit"
-              onClick={(e) => {
-                handleSubmit(e);
-              }}
-            ></input>
-          )}
-        </form>
-      )}
+      {headerMenu && renderHeaderMenu(headerMenu)}
     </div>
   );
 }

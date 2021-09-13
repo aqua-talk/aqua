@@ -1,16 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import mime from "mime-types";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { Image } from "react-bootstrap";
 import defaultAvatar from "../../assets/images/user.png";
 
-function RegisterPage() {
+function RegisterPage(props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "onSubmit" });
-  const initialValues = { name: "", statusMessage: "", profileImage: "" };
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const initialValues = { name: "", statusMessage: "", profileImage: {} };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState();
   const [preview, setPreview] = useState();
@@ -24,25 +30,41 @@ function RegisterPage() {
 
   const handleUploadImage = async (event) => {
     const file = event.target.files[0];
-    console.log("type", typeof file, "file", file);
     const metadata = { contentType: mime.lookup(file.name) };
-    console.log("metadata", metadata, "mime", mime);
+
+    // preview
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      setPreview(e.target.result);
+    };
 
     setFormValues({
       ...formValues,
-      name: "test",
       profileImage: { file: file, metadata: metadata },
     });
-    console.log(formValues);
-    debugger;
   };
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      let createdUser;
 
-      console.log("createdUser", createdUser);
+      setFormValues({
+        ...formValues,
+        name: data.name,
+        statusMessage: data.statusMessage,
+      });
+      axios
+        .post("")
+        .then((response) => {
+          console.log("response", response);
+          // dispatch
+          history.push(`${props.root}/`);
+        })
+        .catch(function (error) {
+          alert(`회원 정보 등록 실패
+        ${error}`);
+        });
       setLoading(false);
     } catch (error) {
       setFormErrors(error.message);
@@ -91,6 +113,49 @@ function RegisterPage() {
           * 필수 입력
         </p>
 
+        <div
+          style={{
+            margin: "10px 0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 10,
+          }}
+        >
+          <Image
+            src={preview ?? defaultAvatar}
+            width={100}
+            roundedCircle
+            style={{ backgroundColor: "#fff", border: "2px solid skyblue" }}
+          />
+          <input
+            type="file"
+            name="image"
+            accept="image/jpeg, image/png"
+            ref={inputOpenImageRef}
+            onChange={handleUploadImage}
+            style={{ display: "none" }}
+          />
+          <input
+            type="button"
+            value="변경"
+            onClick={() => {
+              handleOpenImageRef();
+            }}
+            style={{
+              marginTop: 20,
+              height: 30,
+              borderRadius: 20,
+              padding: "0 10px",
+              backgroundColor: "#C4EBE8",
+              fontSize: 12,
+              color: "#3A9995",
+              border: "1px solid #3A9995",
+              boxShadow: "1px 1px 1px #3A9995",
+            }}
+          />
+        </div>
+
         <label for="name">
           이름<span className="warningMessage">*</span>
         </label>
@@ -120,36 +185,14 @@ function RegisterPage() {
             <br /> (최대 20글자)
           </p>
         )}
-        <div style={{ marginTop: 20, padding: 20, backgroundColor: "#fff" }}>
-          <Image
-            src={preview ?? defaultAvatar}
-            width={50}
-            roundedCircle
-            style={{ backgroundColor: "#fff" }}
-          />
-          <input
-            type="file"
-            name="image"
-            accept="image/jpeg, image/png"
-            ref={inputOpenImageRef}
-            onChange={handleUploadImage}
-            // style={{ display: "none" }}
-          />
-        </div>
-        {/* 
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>프로필 사진</Form.Label>
-          <Form.Control type="file" size="sm" />
-        </Form.Group> */}
-        <div style={{ height: 50, display: "flex", alignItems: "flex-end" }}>
-          {formErrors && <p className="warningMessage">{formErrors}</p>}
-        </div>
+
+        {formErrors && <p className="warningMessage"> {formErrors}</p>}
         <input
           type="submit"
           value="확인"
           disabled={loading}
           style={{
-            marginTop: 10,
+            marginTop: 30,
             height: 40,
             backgroundColor: "#C4EBE8",
             color: "#3A9995",

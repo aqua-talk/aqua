@@ -2,35 +2,10 @@ import React, { useState } from "react";
 
 import Friend from "./Friend";
 
-import testFriendImage1 from "../../../../assets/images/UTH.png"; // 임시
-import testFriendImage2 from "../../../../assets/images/KJG.png"; // 임시
-import testFriendImage3 from "../../../../assets/images/CGS.png"; // 임시
-
-function FriendList() {
-  const [friendList, setFriendList] = useState([
-    {
-      name: "엄태혁",
-      email: "test1@test.test",
-      statusMessage: "test",
-      profileImage: testFriendImage1,
-    },
-    {
-      name: "김정국",
-      email: "test2@test.test",
-      statusMessage: "test",
-      profileImage: testFriendImage2,
-    },
-    {
-      name: "차광성",
-      email: "test3@test.test",
-      statusMessage: "test",
-      profileImage: testFriendImage3,
-    },
-  ]);
-
+function FriendList(props) {
   const renderFriends = () => {
     let friendArray = [];
-    friendList.map((friend, index) => {
+    props.friendData.map((friend, index) => {
       friendArray.push(<Friend key={index} friend={friend} />);
     });
     return friendArray.sort((a, b) => {
@@ -48,7 +23,7 @@ function FriendList() {
           textAlign: "left",
         }}
       >
-        친구 {friendList.length}
+        친구 {props.friendData.length}
       </h5>
       {renderFriends()}
     </div>

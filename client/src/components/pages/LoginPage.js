@@ -58,7 +58,7 @@ function LoginPage(props) {
           <img width="24px" src={googleIcon} />
         </div>
         <a
-          href={"http://aqua-talk.shop:3002/auth/google"}
+          href={props.domain + "/auth/google"}
           style={{
             padding: "0 20px",
             whiteSpace: "nowrap",
