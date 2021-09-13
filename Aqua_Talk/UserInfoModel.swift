@@ -64,7 +64,7 @@ struct UserInfo: Codable {
     let name: String
     let statusMessage: String
     let profile: String
-    let token: String
+//    let token: String
     var friends: [FriendInfo]?
     init(){
         email = ""
@@ -72,7 +72,7 @@ struct UserInfo: Codable {
         name = ""
         statusMessage = ""
         profile = ""
-        token = ""
+//        token = ""
         friends = []
     }
     enum CodingKeys: String, CodingKey {
@@ -81,7 +81,7 @@ struct UserInfo: Codable {
         case name = "username"
         case statusMessage
         case profile
-        case token = "gtoken"
+//        case token = "gtoken"
         case friends = "friend_list"
     }
 }

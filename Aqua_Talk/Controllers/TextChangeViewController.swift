@@ -7,37 +7,36 @@
 
 import UIKit
 
-class TextChangeViewController: UIViewController, UITextFieldDelegate {
-
-    @IBOutlet weak var textField: UITextField!
+class TextChangeViewController: UIViewController {
+    @IBOutlet weak var textChangeView: UIView!
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textLength: UILabel!
     @IBOutlet weak var updateButton: UIBarButtonItem!
     @IBOutlet weak var textDeleteButton: UIButton!
     
     var count: Int?
-    var name: String?
-    var message: String?
+    var text: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.textField.delegate = self
-        textField.borderStyle = .none
-        textField.textFielAaddBottomBorderWithColor(color: UIColor.gray, width: CGFloat(1))
+        setSize()
+        textChangeView.labelAddBottomBorderWithColor(color: UIColor.gray, width: CGFloat(1))
+        textView.isScrollEnabled = false
+        textView.text = text
+        textDeleteButton.isHidden = textView.text!.count == 0 ? true : false
+        textLength.text = "\(textView.text!.count)/\(count!)"
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.textField.becomeFirstResponder()
-    }
-    
-    @IBAction func textFieldChanged(_ sender: Any) {
-        if textField.text!.count > count! {
-            textField.deleteBackward()
-        }
-        textLength.text = "\(textField.text!.count)/\(count)"
+        self.textView.becomeFirstResponder() //포커스 잡아주는거임
     }
 
     @IBAction func textDelete(_ sender: Any) {
-        textField.text = ""
-        textLength.text = "\(textField.text!.count)/\(count)"
+        textView.text = ""
+        textDeleteButton.isHidden = true
+        setSize()
+        textLength.text = "\(textView.text!.count)/\(count!)"
     }
     @IBAction func updateText(_ sender: Any) {
         
@@ -46,13 +45,27 @@ class TextChangeViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: false, completion: nil)
     }
     
+    private func setSize(){
+        let size = CGSize(width: textView.bounds.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+        }
+    }
 }
 
-extension UITextField {
-    func textFielAaddBottomBorderWithColor(color: UIColor, width: CGFloat) {
-        let border = CALayer()
-        border.backgroundColor = color.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: self.frame.size.width, height: width)
-        self.layer.addSublayer(border)
-      }
+extension TextChangeViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        setSize()
+        if textView.text!.count > count! {
+            textView.deleteBackward()
+        }
+        textDeleteButton.isHidden = textView.text!.count == 0 ? true : false
+        textLength.text = "\(textView.text!.count)/\(count!)"
+    }
 }
+
+
+

@@ -48,7 +48,7 @@ class ProfileUpdateViewController: UIViewController {
         }
         VC.modalPresentationStyle = .fullScreen
         VC.count = 20
-        VC.name = nameLabel.text
+        VC.text = name
         self.present(VC, animated: true, completion: nil)
     }
     @objc func messageChange(){
@@ -58,7 +58,7 @@ class ProfileUpdateViewController: UIViewController {
         }
         VC.modalPresentationStyle = .fullScreen
         VC.count = 60
-        VC.message = statusMessage.text
+        VC.text = message
         self.present(VC, animated: true, completion: nil)
     }
     
