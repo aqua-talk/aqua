@@ -6,38 +6,31 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var apiRouter = require("./routes/api");
 var { sequelize } = require("./models/index");
-const multer =require('multer');
+const multer = require("multer");
 var app = express();
 sequelize.sync();
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-
-
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
-
 
 // FILE UPLOAD
 const upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads/');
+      cb(null, "uploads/");
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname);
-    }
+    },
   }),
 });
-app.post('/upload', upload.single('img'), (req, res) => {
-  console.log(req.file); 
-});   
-
-
+app.post("/upload", upload.single("img"), (req, res) => {
+  console.log(req.file);
+});
 
 //USE MIDDLEWARE
 app.use(cors());
@@ -53,17 +46,9 @@ app.use("/api", apiRouter);
 //passport
 const passport = require("./lib/passport")(app);
 
-
-
-
-
-
-/*
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
-*/
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -80,9 +65,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-
-
-
 
 module.exports = app;

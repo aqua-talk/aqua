@@ -55,7 +55,7 @@ function RegisterPage(props) {
         statusMessage: data.statusMessage,
       });
       axios
-        .post("")
+        .post("") // api 작성
         .then((response) => {
           console.log("response", response);
           // dispatch
