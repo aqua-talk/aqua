@@ -15,6 +15,8 @@ class ProfileUpdateViewController: UIViewController {
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var messageView: UIView!
     
+    let userViewModel = UserViewModel()
+    
     var image = UIImage()
     var name: String?
     var message: String?
@@ -24,11 +26,7 @@ class ProfileUpdateViewController: UIViewController {
         cameraImage.layer.cornerRadius = 10
         profileImage.image = image
         nameLabel.text = name
-        if message == ""{
-            statusMessage.text = "상태메시지를 입력해 주세요."
-        } else {
-            statusMessage.text = message
-        }
+        
         
         nameView.labelAddBottomBorderWithColor(color: UIColor.gray, width: CGFloat(1))
         messageView.labelAddBottomBorderWithColor(color: UIColor.gray, width: CGFloat(1))
@@ -40,6 +38,16 @@ class ProfileUpdateViewController: UIViewController {
         messageView.addGestureRecognizer(messaageTab)
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+            if let updateName = name {
+                nameLabel.text = updateName
+            }
+            if message == ""{
+                statusMessage.text = "상태메시지를 입력해 주세요."
+            } else {
+                statusMessage.text = message
+            }
+        }
     
     @objc func nameChange(){
         print("name")
@@ -67,6 +75,13 @@ class ProfileUpdateViewController: UIViewController {
     }
     
     @IBAction func updateInfo(_ sender: Any) {
+        DispatchQueue.main.async {
+            if URLSessionAPI.userInfoUpdate(self.userViewModel.userInfo.email, self.nameLabel.text!, self.statusMessage.text ?? "") {
+                //update
+            }else {
+                //겨고창 띄우기 정도?
+            }
+        }
     }
 }
 

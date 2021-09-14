@@ -12,6 +12,7 @@ class URLSessionAPI {
     let userViewModel = UserViewModel()
 
     static func createUser(_ email: String, _ name: String, _ password: String) {
+        
         let parameter = [
             "email": "\(email)",
             "name": "\(name)",
@@ -167,12 +168,12 @@ class URLSessionAPI {
     static func friendSearch(_ trem: String, completion: @escaping ([FriendInfo]) -> Void) {
         let parameter = ["friend_name": trem]
         
-        Alamofire.request("http://3.35.70.131:3002/api/search/friend", method: .get, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
+        Alamofire.request("http://3.35.70.131:3002/api/search/friend", method: .post, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
             case .success(let jsonvalue):
                 do{
                     let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
-                    print(data)
                     let value = parsing.parseFriends(data)
+                    print(value)
                     completion(value)
                 }
                 catch let error{
@@ -184,15 +185,19 @@ class URLSessionAPI {
         }
     }
     
-    static func addFriend(_ trem: String, completion: @escaping (FriendInfo) -> Void) {
-        let parameter = ["email": trem]
-        
-        Alamofire.request("url", method: .post, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
+    static func addFriend(_ infoEmail: String, _ email: String, completion: @escaping (addCheck) -> Void) {
+
+        let parameter = [
+            "email" : infoEmail,
+            "friend_name": email
+        ]
+
+        Alamofire.request("http://3.35.70.131:3002/api/insert/friend", method: .post, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
             case .success(let jsonvalue):
                 do{
                     let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
                     print(data)
-                    let value = parsing.parseFriend(data)
+                    let value = parsing.parseAddCheck(data) // 파싱하는거 바꿔줘야함
                     completion(value)
                 }
                 catch let error{
@@ -202,6 +207,30 @@ class URLSessionAPI {
                 print("===========\(error.localizedDescription)")
             }
         }
+    }
+    
+    static func userInfoUpdate(_ infoEmail: String, _ name: String, _ message: String) -> Bool{
+        let parameter = [
+            "userEmail" : infoEmail,
+            "name" : name,
+            "message" : message
+        ]
+        var check = false
+        Alamofire.request("url", method: .patch, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
+            case .success(let jsonvalue):
+                do{
+                    check = true
+                }
+                catch let error{
+                    print("-->update error: \(error.localizedDescription)")
+                    check = false
+                }
+            case .failure(let error):
+                print("===========\(error.localizedDescription)")
+                check = false
+            }
+        }
+        return check
     }
 }
 
@@ -219,19 +248,31 @@ class parsing {
             
         }
     }
-    static func parseFriend(_ data: Data) -> FriendInfo {
+    static func parseAddCheck(_ data: Data) -> addCheck {
         let decoder = JSONDecoder()
-        
         do {
-            let response = try decoder.decode(FriendInfoResponse.self, from: data)
-            let friend = response.friend
-            return friend
+            let response = try decoder.decode(addCheck.self, from: data)
+            print(response.check)
+            return response
         }catch let error {
             print("-->parsing error: \(error.localizedDescription)")
-            return FriendInfo()
+            return addCheck()
             
         }
     }
+//    static func parseFriend(_ data: Data) -> FriendInfo {
+//        let decoder = JSONDecoder()
+//
+//        do {
+//            let response = try decoder.decode(FriendInfoResponse.self, from: data)
+//            let friend = response.friend
+//            return friend
+//        }catch let error {
+//            print("-->parsing error: \(error.localizedDescription)")
+//            return FriendInfo()
+//
+//        }
+//    }
 }
 
 

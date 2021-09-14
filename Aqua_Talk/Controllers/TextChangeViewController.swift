@@ -19,7 +19,7 @@ class TextChangeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSize()
+        setting()
         textChangeView.labelAddBottomBorderWithColor(color: UIColor.gray, width: CGFloat(1))
         textView.isScrollEnabled = false
         textView.text = text
@@ -35,17 +35,29 @@ class TextChangeViewController: UIViewController {
     @IBAction func textDelete(_ sender: Any) {
         textView.text = ""
         textDeleteButton.isHidden = true
-        setSize()
+        setting()
         textLength.text = "\(textView.text!.count)/\(count!)"
     }
     @IBAction func updateText(_ sender: Any) {
-        
+        let preVC = self.presentingViewController
+        guard let vc = preVC as? ProfileUpdateViewController else {
+            return
+        }
+        if count == 20 {
+            vc.name = textView.text
+        }else {
+            vc.message = textView.text
+        }
+        self.presentingViewController?.dismiss(animated: true)
     }
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: false, completion: nil)
     }
     
-    private func setSize(){
+    private func setting(){
+        if count == 20 {
+            updateButton.isEnabled = textView.text.count == 0 ? false : true
+        }
         let size = CGSize(width: textView.bounds.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         textView.constraints.forEach { (constraint) in
@@ -58,7 +70,8 @@ class TextChangeViewController: UIViewController {
 
 extension TextChangeViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        setSize()
+        setting()
+        
         if textView.text!.count > count! {
             textView.deleteBackward()
         }

@@ -32,6 +32,10 @@ class HomeViewController: UIViewController {
         tableView.register(nibName, forCellReuseIdentifier: "friendCell")
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tableView.reloadData()
+    }
     @IBAction func searchButton(_ sender: Any) {
         guard let VC = self.storyboard?.instantiateViewController(identifier: "SearchViewController") else {
             return

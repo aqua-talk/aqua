@@ -161,7 +161,6 @@ extension LoginViewController: GIDSignInDelegate {
                         do{
                             let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
                             let value = LoginViewController.parseGUserInfo(data)
-//                            print(value)
                             self.userViewModel.googleUserLoadTask(userInfo: value.user)// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
                             //====================== 화면 전환
                             guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {

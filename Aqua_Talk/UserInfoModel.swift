@@ -93,13 +93,13 @@ struct FriendInfoListResponse: Codable {
         case friends = "friend_list_info"
     }
 }
-struct FriendInfoResponse: Codable {
-    let friend: FriendInfo
-    
-    enum CodingKeys: String, CodingKey {
-        case friend = "friend_list_info"
-    }
-}
+//struct FriendInfoResponse: Codable {
+//    let friend: FriendInfo
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case friend = "friend_list_info"
+//    }
+//}
 struct FriendInfo: Equatable, Codable {
     let email: String
     var name: String
@@ -128,6 +128,17 @@ struct FriendInfo: Equatable, Codable {
     
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.email == rhs.email
+    }
+}
+
+struct addCheck: Codable {
+    let check: Bool
+    
+    init(){
+        check = false
+    }
+    enum CodingKeys: String, CodingKey {
+        case check = "is_success"
     }
 }
 
