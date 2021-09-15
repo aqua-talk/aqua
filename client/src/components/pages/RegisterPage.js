@@ -32,16 +32,21 @@ function RegisterPage(props) {
     const file = event.target.files[0];
     const metadata = { contentType: mime.lookup(file.name) };
 
+    console.log("file: ", file);
+    console.log("metadata: ", metadata);
+
     // preview
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       setPreview(e.target.result);
+      console.log("fileReader: ", e.target.result);
     };
 
     setFormValues({
       ...formValues,
-      profileImage: { file: file, metadata: metadata },
+      // profileImage: { file: file, metadata: metadata },
+      profileImage: file,
     });
   };
 
@@ -54,8 +59,15 @@ function RegisterPage(props) {
         name: data.name,
         statusMessage: data.statusMessage,
       });
+      const formData = new FormData();
+      formData.append("name", formValues.name);
+      formData.append("statusMessage", formValues.statusMessage);
+      formData.append("image", formValues.profileImage);
+      const config = {
+        headers: { "contents-type": "multipart/form-data" },
+      };
       axios
-        .post("") // api 작성
+        .post("", formData, config) // api 작성
         .then((response) => {
           console.log("response", response);
           // dispatch
