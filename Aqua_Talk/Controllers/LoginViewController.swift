@@ -145,38 +145,38 @@ extension LoginViewController: GIDSignInDelegate {
             "gtoken": user!.authentication.accessToken!
         ]
         //======================
-//        self.userViewModel.googleUserLoadTask(userInfo: UserInfo())// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
-//        print("friendCount===>\(userViewModel.friendsCount)")
-//        guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
-//            return
-//        }
+        self.userViewModel.googleUserLoadTask(userInfo: UserInfo())// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
+        print("friendCount===>\(userViewModel.friendsCount)")
+        guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+            return
+        }
         
-//        self.navigationController?.pushViewController(homeVC, animated: true)
+        self.navigationController?.pushViewController(homeVC, animated: true)
         //======================
 //        print(loginParameter)
-        Alamofire.request("http://3.35.70.131:3002/api/login/info", method: .post, parameters: loginParameter)
-                            .validate(statusCode: 200..<300)
-                    .responseJSON { (response) in switch response.result {
-                    case .success(let jsonvalue):
-                        do{
-                            let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
-                            let value = LoginViewController.parseGUserInfo(data)
-                            self.userViewModel.googleUserLoadTask(userInfo: value.user)// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
-                            //====================== 화면 전환
-                            guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
-                                return
-                            }
-        
-                            self.navigationController?.pushViewController(homeVC, animated: true)
-                            //======================
-                        }
-                        catch let error{
-                            print("-->parsing error: \(error.localizedDescription)")
-                        }
-                    case .failure(let error):
-                        print("===========\(error.localizedDescription)")
-                    }
-                }
+//        Alamofire.request("http://3.35.70.131:3002/api/login/info", method: .post, parameters: loginParameter)
+//                            .validate(statusCode: 200..<300)
+//                    .responseJSON { (response) in switch response.result {
+//                    case .success(let jsonvalue):
+//                        do{
+//                            let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+//                            let value = LoginViewController.parseGUserInfo(data)
+//                            self.userViewModel.googleUserLoadTask(userInfo: value.user)// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
+//                            //====================== 화면 전환
+//                            guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
+//                                return
+//                            }
+//
+//                            self.navigationController?.pushViewController(homeVC, animated: true)
+//                            //======================
+//                        }
+//                        catch let error{
+//                            print("-->parsing error: \(error.localizedDescription)")
+//                        }
+//                    case .failure(let error):
+//                        print("===========\(error.localizedDescription)")
+//                    }
+//                }
         return
     }
     

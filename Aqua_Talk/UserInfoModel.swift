@@ -67,13 +67,13 @@ struct UserInfo: Codable {
 //    let token: String
     var friends: [FriendInfo]?
     init(){
-        email = ""
+        email = "test"
 //        userid = ""
-        name = ""
-        statusMessage = ""
+        name = "test"
+        statusMessage = "test"
         profile = ""
 //        token = ""
-        friends = []
+        friends = [FriendInfo(),FriendInfo(email: "1", name: "1", m: "1", p: "1"),FriendInfo(email: "2", name: "2", m: "2", p: "2")]
     }
     enum CodingKeys: String, CodingKey {
         case email
@@ -107,10 +107,16 @@ struct FriendInfo: Equatable, Codable {
     var profile: String
     
     init(){
-        email = ""
-        name = ""
-        statusMessage = ""
+        email = "ftest"
+        name = "ftest"
+        statusMessage = "ftest"
         profile = ""
+    }
+    init(email: String, name: String, m:String, p:String){
+        self.email = email
+        self.name = name
+        self.statusMessage = m
+        self.profile = p
     }
     
     mutating func update(name: String, statusMessage: String, profile: String){
@@ -168,13 +174,12 @@ class AquaManager {
 //
 //    }
     func addFriend(_ friend: FriendInfo) {
-        user?.friends?.append(friend)
+        user!.friends?.append(friend)
 //        saveFriend()
     }
-//    func deleteFriend(_ friend: FriendInfo) {
-//        friends = friends.filter { $0.email != friend.email }
-//        saveFriend()
-//    }
+    func deleteFriend(_ friend: FriendInfo) {
+        user!.friends = user!.friends?.filter { $0.email != friend.email}
+    }
 //    func updateFriend(_ friend: FriendInfo) {
 //
 //        //여기 서버에서 받아와서 업데이트임 이부분

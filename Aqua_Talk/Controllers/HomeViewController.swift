@@ -11,6 +11,7 @@ class HomeViewController: UIViewController {
     let userViewModel = UserViewModel()
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editButton: UIButton!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
@@ -19,7 +20,6 @@ class HomeViewController: UIViewController {
             }
             let indexPath = sender as? IndexPath
             vc.modalPresentationStyle = .fullScreen
-//            vc.modalTransitionStyle = .coverVertical
             vc.section = indexPath?.section
             vc.row = indexPath?.row
         }
@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
         
         let nibName = UINib(nibName: "FriendsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "friendCell")
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +43,16 @@ class HomeViewController: UIViewController {
         }
         self.navigationController?.pushViewController(VC, animated: false)
         
+    }
+    @IBAction func editButton(_ sender: Any) {
+        if self.tableView.isEditing {
+            self.editButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
+            self.tableView.setEditing(false, animated: true)
+            
+        } else {
+            self.editButton.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
+            self.tableView.setEditing(true, animated: true)
+        }
     }
     
 }
@@ -81,6 +92,9 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showDetail", sender: indexPath)
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.section == 0 ? 80 : 60
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -93,19 +107,35 @@ extension HomeViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as? FriendsTableViewCell else {
                 return UITableViewCell()
             }
+            
             let friendInfo = userViewModel.friendInfo(at: indexPath.row)
             cell.update(info: friendInfo)
-            tableView.rowHeight = 60
             return cell
         }
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as? MyTableViewCell else {
-            return UITableViewCell()
+        else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as? MyTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.update(info: userViewModel.userInfo)
+            return cell
         }
-        cell.update(info: userViewModel.userInfo)
-        tableView.rowHeight = 80
-        return cell
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if indexPath.section == 0 {
+            return .none
+        }else {
+            return .delete
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let friend = userViewModel.friends[indexPath.row]
+            self.userViewModel.deleteFriend(friend)
+            tableView.deleteRows(at: [indexPath], with: .none)
+//            tableView.reloadData()//여기 처리 생각해 봐야함 친구 숫자가 바뀌어야함
+        }
+    }
     
 }

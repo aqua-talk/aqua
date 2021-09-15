@@ -281,6 +281,9 @@
                                         <rect key="frame" x="373" y="14" width="21" height="22"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="gearshape" catalog="system"/>
+                                        <connections>
+                                            <action selector="editButton:" destination="KU7-Bi-2fe" eventType="touchUpInside" id="66E-AV-PTI"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -379,6 +382,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="RjP-b0-a8V" id="jrl-3d-aNr"/>
                         <outlet property="tableView" destination="pXq-XX-t6A" id="TPU-XN-IKm"/>
                         <segue destination="sDg-dS-0ag" kind="presentation" identifier="showDetail" id="YLz-fF-2Ps"/>
                     </connections>

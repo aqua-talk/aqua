@@ -19,16 +19,15 @@ class UserViewModel {
     var friendsCount: Int { // 친구수
         return manager.user?.friends?.count ?? 0
     }
-//
     func addFriend(_ friend: FriendInfo) { //친구 추가
         manager.addFriend(friend)
     }
     func friendInfo(at index: Int) -> FriendInfo{ //친구정보
         return (manager.user?.friends![index])!
     }
-//    func deleteFriend(_ friend: FriendInfo) { //친구제거
-//        manager.deleteFriend(friend)
-//    }
+    func deleteFriend(_ friend: FriendInfo) { //친구제거
+        manager.deleteFriend(friend)
+    }
 //
 //    func updateUser(_ user: UserInfo) { //내정보 업데이트
 //        manager.updateUser(user)//구현안해놨음
