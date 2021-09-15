@@ -12,14 +12,18 @@ module.exports = ((sequelize,DataTypes)=>{
             allowNull: false,
         },
         username:{
-            type: Sequelize.STRING(100),
+            type: Sequelize.STRING( 100),
             allowNull: false, // 카카오 로그인은 비번 필요없으니,,
         },
-        gtoken :{ // 뭐로 로그인 했는지 : 카카오, 로컬,,
-            type: Sequelize.STRING(1000),
-            allowNull: false,
-            
+       
+        statusMessage:{
+            type:Sequelize.STRING(100),
+            allowNull:true,
         },
+        profile:{
+            type:Sequelize.STRING(100),
+            allowNull:true,
+        }
        
 
     },{

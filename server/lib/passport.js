@@ -54,38 +54,39 @@ module.exports = function (app) {
                 //  console.log('Googlestragey', accessToken, refreshToken, profile)
                 email = profile.emails[0].value;
                 //console.log("email is ", profile._json);
+                console.log("profile123132",profile);
                 request.id = profile._json;
                 //console.log("accaccess",request.accessToken);
 
                 user = {
-                    id: shortid.generate(),
                     email: email,
+                    id: profile.id,
                     displayName: profile.displayName,
-                    googleId: profile.id,
+                   
                 };
                 //변수에 저장
 
 
-                models.User_web         //User_webs 테이블
+                models.User        //User_webs 테이블
                     .findOrCreate({     //where에 있으면 select 없으면 insert
                         where: {
                             email: user.email
 
                         },
                         defaults: {         
-                            id: user.id,
-                            displayName: user.displayName,
-                            googleId: user.googleId
+                            userid: user.id,
+                            username: user.displayName
+                            
                         }
                     })
                     .then(user_info => {        //findorcreate 실행되고나서
                         console.log("user", user_info[0]._options.isNewRecord); //새로 생성된건지 기존에 있는건지
                         isNewRegister = user_info[0]._options.isNewRecord;
                         console.log(user_info[0].dataValues.id)
-                        id = user_info[0].dataValues.id
+                      
                         email = user_info[0].dataValues.email
                         display_name = user_info[0].dataValues.displayName
-                        google_id = user_info[0].dataValues.googleId
+                        google_id = user_info[0].dataValues.id
                     })
 
                 done(null, user)        
@@ -125,7 +126,6 @@ module.exports = function (app) {
             user_info: {
                 id: id,
                 email: email,
-
                 display_name: display_name,
                 google_id: google_id
 

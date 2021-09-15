@@ -14,35 +14,14 @@
     <a href="http://localhost:3002/auth/google">login</a>
     <button id="ajax">ajax요청</button>
     <button id="logout">로그아웃</button>   
-    <button id="imgdown">이미지 다운로드</button>
     <div id="result"></div>
 
     <script>
         $(function () {
             $("#ajax").on("click", getData);
             $("#logout").on("click", logout);
-            $("#imgdown").on("click",imgDown);
         });
-        function imgDown(){
-            $.post("http://localhost:3002/api/file/download");
-        }
 
-
-        function sendPost(url, params) {
-            var form = document.createElement('form');
-            form.setAttribute('method', 'post'); //POST 메서드 적용
-            form.setAttribute('action', url);	// 데이터를 전송할 url
-            document.charset = "utf-8";
-            for ( var key in params) {	// key, value로 이루어진 객체 params
-                var hiddenField = document.createElement('input');
-                hiddenField.setAttribute('type', 'hidden'); //값 입력
-                hiddenField.setAttribute('name', key);
-                hiddenField.setAttribute('value', params[key]);
-                form.appendChild(hiddenField);
-            }
-            document.body.appendChild(form);
-            form.submit();	// 전송~
-}
         function getData() {
             $.ajax({
                 type: "get", //전송타입 
