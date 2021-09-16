@@ -104,9 +104,9 @@ function FriendHeader(props) {
 
   const searchedFriendFromServer = null;
   const handlePostAddFriend = (e) => {
-    console.log(e.target.value);
+    let friend_name = e.target.value;
     axios
-      .get("/search_friend")
+      .post("/api/search/friend", { data: friend_name })
       .then((response) => {
         console.log(response);
         // 여기에 친구추가 전처리(검색) 작성
@@ -133,7 +133,7 @@ function FriendHeader(props) {
   const handleAddFriend = (e) => {
     e.preventDefault();
     axios
-      .get("/add_friend")
+      .post("/api/insert/friend")
       .then((response) => {
         console.log(response);
         // 여기에 친구추가 작성
