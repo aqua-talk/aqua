@@ -150,10 +150,10 @@ extension LoginViewController: GIDSignInDelegate {
         guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
             return
         }
-        
+
         self.navigationController?.pushViewController(homeVC, animated: true)
         //======================
-//        print(loginParameter)
+        print(loginParameter)
 //        Alamofire.request("http://3.35.70.131:3002/api/login/info", method: .post, parameters: loginParameter)
 //                            .validate(statusCode: 200..<300)
 //                    .responseJSON { (response) in switch response.result {
@@ -161,7 +161,8 @@ extension LoginViewController: GIDSignInDelegate {
 //                        do{
 //                            let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
 //                            let value = LoginViewController.parseGUserInfo(data)
-//                            self.userViewModel.googleUserLoadTask(userInfo: value.user)// 여기에 유저받아온거 넣어주면됨 나중에 수정해 줘야함****************
+//                            print(value)
+//                            self.userViewModel.googleUserLoadTask(userInfo: value.user)
 //                            //====================== 화면 전환
 //                            guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else {
 //                                return
@@ -177,7 +178,7 @@ extension LoginViewController: GIDSignInDelegate {
 //                        print("===========\(error.localizedDescription)")
 //                    }
 //                }
-        return
+//        return
     }
     
     static func parseGUserInfo(_ data: Data) -> LoginResponse {

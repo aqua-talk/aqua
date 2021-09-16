@@ -185,7 +185,7 @@ class URLSessionAPI {
         }
     }
     
-    static func addFriend(_ infoEmail: String, _ email: String, completion: @escaping (addCheck) -> Void) {
+    static func addFriend(_ infoEmail: String, _ email: String, completion: @escaping (Check) -> Void) {
 
         let parameter = [
             "email" : infoEmail,
@@ -208,29 +208,52 @@ class URLSessionAPI {
             }
         }
     }
-    
-    static func userInfoUpdate(_ infoEmail: String, _ name: String, _ message: String) -> Bool{
+    static func deleteFriend(_ infoEmail: String, _ email: String, completion: @escaping (Check) -> Void) {
+
         let parameter = [
-            "userEmail" : infoEmail,
-            "name" : name,
-            "message" : message
+            "email" : infoEmail,
+            "friend_name": email
         ]
-        var check = false
-        Alamofire.request("url", method: .patch, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
+
+        Alamofire.request("http://3.35.70.131:3002/api/delete/friend", method: .post, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
             case .success(let jsonvalue):
                 do{
-                    check = true
+                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+                    print(data)
+                    let value = parsing.parseAddCheck(data) // 파싱하는거 바꿔줘야함
+                    completion(value)
                 }
                 catch let error{
-                    print("-->update error: \(error.localizedDescription)")
-                    check = false
+                    print("-->parsing error: \(error.localizedDescription)")
                 }
             case .failure(let error):
                 print("===========\(error.localizedDescription)")
-                check = false
             }
         }
-        return check
+    }
+    static func updateFriend(_ infoEmail: String, _ name: String, _ message: String, completion: @escaping (Check) -> Void) {
+
+        let parameter = [
+            "email" : infoEmail,
+            "new_name" : name,
+            "new_status_message": message
+        ]
+
+        Alamofire.request("http://3.35.70.131:3002/api/update/info", method: .post, parameters: parameter).validate(statusCode: 200..<300).responseJSON { (response) in switch response.result {
+            case .success(let jsonvalue):
+                do{
+                    let data = try JSONSerialization.data(withJSONObject: jsonvalue, options: .prettyPrinted)
+                    print(data)
+                    let value = parsing.parseAddCheck(data) // 파싱하는거 바꿔줘야함
+                    completion(value)
+                }
+                catch let error{
+                    print("-->parsing error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("===========\(error.localizedDescription)")
+            }
+        }
     }
 }
 
@@ -248,15 +271,15 @@ class parsing {
             
         }
     }
-    static func parseAddCheck(_ data: Data) -> addCheck {
+    static func parseAddCheck(_ data: Data) -> Check {
         let decoder = JSONDecoder()
         do {
-            let response = try decoder.decode(addCheck.self, from: data)
+            let response = try decoder.decode(Check.self, from: data)
             print(response.check)
             return response
         }catch let error {
             print("-->parsing error: \(error.localizedDescription)")
-            return addCheck()
+            return Check()
             
         }
     }

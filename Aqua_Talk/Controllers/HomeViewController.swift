@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     let userViewModel = UserViewModel()
-
+    var label = UILabel()
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editButton: UIButton!
     
@@ -30,7 +30,6 @@ class HomeViewController: UIViewController {
         
         let nibName = UINib(nibName: "FriendsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "friendCell")
-        
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -72,14 +71,12 @@ extension HomeViewController: UITableViewDelegate {
         self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
         
         let view = UIView(frame: CGRect(x:0, y:0, width: tableView.frame.width, height: tableView.frame.height))
-        
         view.backgroundColor = .clear
-        let label = UILabel(frame: CGRect(x: 30, y: 0, width: view.frame.width, height: 30))
+        
+        label = UILabel(frame: CGRect(x: 30, y: 0, width: view.frame.width, height: 30))
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.text = "친구 \(userViewModel.friendsCount)"
         label.textColor = .systemGray
-        
-        
         view.addSubview(label)
         return view
     }
@@ -132,9 +129,17 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             let friend = userViewModel.friends[indexPath.row]
+            DispatchQueue.main.async {
+                URLSessionAPI.deleteFriend(self.userViewModel.userInfo.email, friend.email) { Check in
+                    if !Check.check {
+                        print("실패")
+                        return
+                    }
+                }
+            }
             self.userViewModel.deleteFriend(friend)
+            label.text = "친구 \(userViewModel.friendsCount)"
             tableView.deleteRows(at: [indexPath], with: .none)
-//            tableView.reloadData()//여기 처리 생각해 봐야함 친구 숫자가 바뀌어야함
         }
     }
     

@@ -28,10 +28,9 @@ class UserViewModel {
     func deleteFriend(_ friend: FriendInfo) { //친구제거
         manager.deleteFriend(friend)
     }
-//
-//    func updateUser(_ user: UserInfo) { //내정보 업데이트
-//        manager.updateUser(user)//구현안해놨음
-//    }
+    func updateUser(name: String, message: String) { //내정보 업데이트
+        manager.updateUser(name: name, message: message)
+    }
     func googleUserLoadTask(userInfo: UserInfo){
         manager.googleUserLoad(userInfo: userInfo)
     }

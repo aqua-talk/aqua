@@ -15,8 +15,8 @@ class MyTableViewCell: UITableViewCell {
     @IBOutlet weak var nameProfileCenterY: NSLayoutConstraint!
     
     func update(info: UserInfo) {
-//        profileImage.setImageUrl(info.profile) //****************
-        profileImage.image = UIImage(named: "luffy.jpg")//여기 지워야함 *****************
+        profileImage.setImageUrl(info.profile) //****************
+//        profileImage.image = UIImage(named: "luffy.jpg")//여기 지워야함 *****************
         profileImage.layer.cornerRadius = 20
         nameLabel.text = info.name
         statusMessage.text = info.statusMessage

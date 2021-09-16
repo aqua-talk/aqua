@@ -76,11 +76,14 @@ class ProfileUpdateViewController: UIViewController {
     
     @IBAction func updateInfo(_ sender: Any) {
         DispatchQueue.main.async {
-            if URLSessionAPI.userInfoUpdate(self.userViewModel.userInfo.email, self.nameLabel.text!, self.statusMessage.text ?? "") {
-                //update
-            }else {
-                //겨고창 띄우기 정도?
+            URLSessionAPI.updateFriend(self.userViewModel.userInfo.email, self.nameLabel.text!, self.statusMessage.text ?? ""){ Check in
+                if Check.check {
+                    self.userViewModel.updateUser(name: self.nameLabel.text!, message: self.statusMessage.text ?? "")
+                }else {
+                    print("실패")
+                }
             }
+            
         }
     }
 }

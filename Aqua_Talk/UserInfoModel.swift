@@ -61,8 +61,8 @@ struct LoginResponse: Codable{
 struct UserInfo: Codable {
     let email: String
 //    let userid: String
-    let name: String
-    let statusMessage: String
+    var name: String
+    var statusMessage: String
     let profile: String
 //    let token: String
     var friends: [FriendInfo]?
@@ -75,14 +75,18 @@ struct UserInfo: Codable {
 //        token = ""
         friends = [FriendInfo(),FriendInfo(email: "1", name: "1", m: "1", p: "1"),FriendInfo(email: "2", name: "2", m: "2", p: "2")]
     }
+    mutating func update(name: String, statusMessage: String){
+        self.name = name
+        self.statusMessage = statusMessage        
+    }
     enum CodingKeys: String, CodingKey {
         case email
 //        case userid
         case name = "username"
-        case statusMessage
+        case statusMessage = "status_message"
         case profile
 //        case token = "gtoken"
-        case friends = "friend_list"
+        case friends = "friend_list_info"
     }
 }
 
@@ -137,7 +141,7 @@ struct FriendInfo: Equatable, Codable {
     }
 }
 
-struct addCheck: Codable {
+struct Check: Codable {
     let check: Bool
     
     init(){
@@ -170,9 +174,9 @@ class AquaManager {
     func googleUserLoad(userInfo: UserInfo){
         user = userInfo
     }
-//    func updateUser(_ userInfo: UserInfo){
-//
-//    }
+    func updateUser(name: String, message: String){
+        user!.update(name: name, statusMessage: message)
+    }
     func addFriend(_ friend: FriendInfo) {
         user!.friends?.append(friend)
 //        saveFriend()
