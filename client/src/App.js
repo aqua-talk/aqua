@@ -15,7 +15,7 @@ import Loading from "./components/pages/Loading";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-const domain = "http://www.aqua-talk.shop:3002";
+const domain = "http://aqua-talk.shop:3002";
 const root = "";
 
 function App() {
@@ -28,25 +28,25 @@ function App() {
     // App 이 생성될때 '/user_info' 로 유저 정보 요청
     if (!currentUser) {
       axios
-        .get("/user_info")
+        .post("/user_info")
         .then((response) => {
-          let userInfo = response.data.user_info;
-          if (userInfo.id) {
-            // user_info에 정보(id)가 담겨있을 경우
+          let userInfo = response.data.userInfo;
+          let isRegistered = response.data.isRegistered;
+          if (userInfo.email) {
+            // user_info에 정보(email)가 담겨있을 경우
             // store에 저장 후 MainPage로
             console.log("유저 정보 조회", userInfo);
             dispatch(setUser(userInfo));
             setIsLoading(false);
-            if (userInfo.name) {
-              // name 임시
-              // user_info에 세부 정보(name)가 담겨있을 경우(최초 Register단계를 거친 경우)
+            if (isRegistered) {
+              // 최초 Register단계를 거친 경우
               history.push(`${root}/`);
             } else {
               // Register단계를 거치지 않은 경우
               history.push(`${root}/register`);
             }
           } else {
-            // user_info에 정보(id)가 담겨있지 않을 경우(로그인 실패 또는 로그 아웃) 경우
+            // user_info에 정보(email)가 담겨있지 않을 경우(로그인 실패 또는 로그 아웃) 경우
             // store에서 유저 정보 삭제 후 LoginPage로
             console.log("유저 정보 없음", response);
             dispatch(clearUser());
@@ -60,7 +60,7 @@ function App() {
           history.push(`${root}/login`);
         });
     }
-  });
+  }, []);
 
   // 로그아웃 함수
   const signOut = () => {

@@ -2,10 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import mime from "mime-types";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Image } from "react-bootstrap";
-import defaultAvatar from "../../assets/images/user.png";
 
 function RegisterPage(props) {
   const {
@@ -16,7 +15,15 @@ function RegisterPage(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const initialValues = { name: "", statusMessage: "", profileImage: {} };
+  const userInfo = useSelector((state) => state.user.currentUser);
+
+  const initialValues = userInfo
+    ? {
+        name: userInfo.userName,
+        statusMessage: userInfo.statusMessage,
+        profileImage: userInfo.profile,
+      }
+    : { name: "", statusMessage: "", profileImage: {} };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState();
   const [preview, setPreview] = useState();
@@ -50,6 +57,14 @@ function RegisterPage(props) {
     });
   };
 
+  // const handleNameChange = (e) => {
+  //   let changedName = e.target.value;
+  //   setFormValues({
+  //     ...formValues,
+  //     name: changedName,
+  //   });
+  // };
+
   const onSubmit = async (data) => {
     try {
       setLoading(true);
@@ -59,15 +74,16 @@ function RegisterPage(props) {
         name: data.name,
         statusMessage: data.statusMessage,
       });
+
       const formData = new FormData();
       formData.append("name", formValues.name);
       formData.append("statusMessage", formValues.statusMessage);
-      formData.append("image", formValues.profileImage);
+      formData.append("profile", formValues.profileImage);
       const config = {
         headers: { "contents-type": "multipart/form-data" },
       };
       axios
-        .post("", formData, config) // api 작성
+        .post("/register", formData, config) // api 작성
         .then((response) => {
           console.log("response", response);
           // dispatch
@@ -114,7 +130,7 @@ function RegisterPage(props) {
           marginBottom: 30,
         }}
       >
-        프로필 정보
+        프로필 정보 등록
       </h1>
       <form
         className="registerForm"
@@ -135,7 +151,7 @@ function RegisterPage(props) {
           }}
         >
           <Image
-            src={preview ?? defaultAvatar}
+            src={preview ?? formValues.profileImage}
             width={100}
             roundedCircle
             style={{ backgroundColor: "#fff", border: "2px solid skyblue" }}

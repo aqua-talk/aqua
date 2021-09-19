@@ -66,13 +66,7 @@ function TabPanel(props) {
         }}
       >
         <li>
-          <FaSignOutAlt
-            size={30}
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              props.signOut();
-            }}
-          />
+          <FaSignOutAlt size={30} style={{ cursor: "pointer" }} onClick={props.signOut} />
         </li>
       </ul>
     </nav>

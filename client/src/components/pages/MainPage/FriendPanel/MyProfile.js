@@ -4,7 +4,7 @@ import { Image } from "react-bootstrap";
 import testProfileImage from "../../../../assets/images/testProfileImage.jpg"; // 임시
 
 function MyProfile() {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const userInfo = useSelector((state) => state.user.currentUser);
 
   let userStatusMessage = "test"; // 임시
 
@@ -19,7 +19,7 @@ function MyProfile() {
           }}
         >
           <h4 style={{ margin: 0, fontSize: "1rem", fontWeight: 600 }}>
-            {currentUser && currentUser.display_name}
+            {userInfo && userInfo.userName}
           </h4>
           {userStatusMessage && <p style={{ margin: 0 }}>{userStatusMessage}</p>}
         </div>
